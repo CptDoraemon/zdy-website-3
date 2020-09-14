@@ -196,10 +196,12 @@ const SearchTable: React.FC<SearchTableProps> = (
     fetchData
   }) => {
   // fetch data on mounted
+  const [pageLoaded, setPageLoaded] = useState(false);
   useEffect(() => {
     if (!tableState.data) {
       fetchData()
     }
+    setPageLoaded(true)
   }, []);
 
   const props = {
@@ -213,7 +215,7 @@ const SearchTable: React.FC<SearchTableProps> = (
 
   return (
     <LoaderWrapper
-      loading={tableState.loading}
+      loading={tableState.loading || !pageLoaded}
       error={tableState.error}
       errorMessage={tableState.errorMessage}
       noResultFound={!tableState.data || !tableState.data.length}

@@ -9,6 +9,7 @@ import {
 } from "./redux/actions/filter/init-filter";
 import {OptionObject} from "./redux/states/sort";
 import {tableActionsGenerators} from "./redux/actions/table/table";
+import {Loading} from "./loader-wrapper/loader-utils-pages";
 
 interface FilterTableProps {
   store: any,
@@ -41,12 +42,13 @@ const InternalFilterTable: React.FC<FilterTableProps> = (
   return (
     <Provider store={store}>
       {
-        isStateInitialized &&
+        isStateInitialized ?
           <>
             {/*@ts-ignore*/}
             <FiltersGroupContainer />
             <SearchTableContainer title={title}/>
-          </>
+          </> :
+          <Loading/>
       }
     </Provider>
   )
