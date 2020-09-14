@@ -28,7 +28,8 @@ const applyPendingFilter = () => {
     let isResettable = false;
     for (let i=0; i<updatedFilterArray.length; i++) {
       const currentFilter = updatedFilterArray[i];
-      const original = currentFilter.original;
+      // a filter's original can be empty
+      const original = currentFilter.original.length ? currentFilter.original : currentFilter.choices;
       const active = currentFilter.active;
       const hash: {[key: string]: boolean} = {};
 

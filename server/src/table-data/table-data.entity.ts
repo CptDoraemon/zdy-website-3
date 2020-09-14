@@ -4,6 +4,9 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 export class TableDataEntity {
 
   @PrimaryGeneratedColumn()
+  'id': number;
+
+  @Column()
   'Gene_symbol': string;
 
   @Column()

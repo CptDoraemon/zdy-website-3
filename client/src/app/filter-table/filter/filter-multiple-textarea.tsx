@@ -27,6 +27,7 @@ const FilterMultipleTextarea: React.FC<FilterMultipleTextareaProps> = ({filter, 
         <Autocomplete
           multiple
           options={filter.choices.map(obj => obj.internalName)}
+          value={filter.pending.map(obj => obj.internalName)}
           onChange={changeHandler}
           className={classes.root}
           renderInput={(params) => (

@@ -32,7 +32,7 @@ const SearchTableHead = ({header, onSelectAllClick, numSelected, rowCount}) => {
           <TableCell
             classes={{stickyHeader: classes.stickyHeaderTC}}
             key={i}
-            align={i === 0 ? 'left' : 'right'}
+            align={'left'}
             padding={'default'}
           >
             {headCell}

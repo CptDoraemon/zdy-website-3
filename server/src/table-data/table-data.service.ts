@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {Repository, Between, In, createQueryBuilder, getConnection} from 'typeorm';
+import {Repository, In, getConnection} from 'typeorm';
 import {TableDataEntity} from "./table-data.entity";
 
 @Injectable()
@@ -27,7 +27,6 @@ export class TableDataService {
     const totalRows = await this.repository.count({
       ...where,
     });
-    console.log(where);
 
     return {
       result,
@@ -48,7 +47,9 @@ export class TableDataService {
       // .setParameter("columnName", columnName)
       .execute();
 
-    return result.map(obj => Object.values(obj)[0])
+    const options = result.map(obj => Object.values(obj)[0]);
+    options.sort((a, b) => a.localeCompare(b));
+    return options
   }
 
 }

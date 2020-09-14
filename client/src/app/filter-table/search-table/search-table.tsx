@@ -151,9 +151,7 @@ const InnerSearchTable = React.forwardRef<HTMLDivElement, InnerSearchTableProps>
 
                       {
                         header.map((key, i) => (
-                          i === 0 ?
-                            <TableCell align="left" key={i}>{row[key]}</TableCell> :
-                            <TableCell align="right" key={i}>{row[key]}</TableCell>
+                          <TableCell align="left" key={i}>{row[key]}</TableCell>
                         ))
                       }
 
