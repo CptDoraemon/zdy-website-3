@@ -13,7 +13,6 @@ export class TableDataColumnOptionsController {
     @Query('column') column: string
   ): Promise<SuccessResponse<TableDataDto>> {
 
-    //
     const options = await this.tableDataService.getColumnOptions(column);
 
     return {
