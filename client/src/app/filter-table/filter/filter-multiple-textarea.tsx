@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {FilterState} from "../redux/states/filter";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -16,29 +16,32 @@ interface FilterMultipleTextareaProps {
 }
 
 const FilterMultipleTextarea: React.FC<FilterMultipleTextareaProps> = ({filter, updatePendingFilterWithValueArray}) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
-  const changeHandler = (e: React.ChangeEvent<any>, value: any) => {
-    console.log(value);
-    updatePendingFilterWithValueArray(filter.internalName, value)
+  const [value, setValue] = useState('');
+
+  const changeHandler = (e: React.ChangeEvent<any>) => {
+    const value = e.target.value.toString();
+    const array = value.split(',').map((str: string) => str.trim());
+    console.log(array)
+    setValue(value);
+    updatePendingFilterWithValueArray(filter.internalName, array)
   };
 
   return (
-        <Autocomplete
-          multiple
-          options={filter.choices.map(obj => obj.internalName)}
-          value={filter.pending.map(obj => obj.internalName)}
-          onChange={changeHandler}
-          className={classes.root}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="Gene Symbols"
-              placeholder="Type a gene symbol"
-            />
-          )}
-        />
+    <TextField
+      label="Gene symbols"
+      multiline
+      rows={4}
+      placeholder="Type gene symbols, separated by comma"
+      variant="outlined"
+      fullWidth
+      value={value}
+      onChange={changeHandler}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
   )
 };
 

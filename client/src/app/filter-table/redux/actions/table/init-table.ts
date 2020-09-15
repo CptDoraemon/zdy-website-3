@@ -19,18 +19,16 @@ const initTable = (
   return async (dispatch: Dispatch, getStore: () => FilterTableDefaultState) => {
     try {
       const columnsRes = await axios.get(urls.tableColumns);
-      const geneSymbolOptionsRes = await axios.get(urls.tableColumnOptions + '?column=Gene_symbol');
+      // const geneSymbolOptionsRes = await axios.get(urls.tableColumnOptions + '?column=Gene_symbol');
 
-      if (columnsRes.status === 200 && geneSymbolOptionsRes.status === 200) {
+      // if (columnsRes.status === 200 && geneSymbolOptionsRes.status === 200) {
+      if (columnsRes.status === 200) {
         const columns: string[] = columnsRes.data.data.columns;
-        const geneSymbolOptions: string[] = geneSymbolOptionsRes.data.data.options;
+        // const geneSymbolOptions: string[] = geneSymbolOptionsRes.data.data.options;
 
         const geneSymbolFilter: MultipleFilterTextareaInitializer = {
           type: FilterTypes.multipleTextarea,
-          choices: geneSymbolOptions.map(str => ({
-            displayName: str,
-            internalName: str
-          })),
+          choices: [],
           displayName: 'Gene Symbol',
           internalName: 'Gene_symbol',
           original: []
