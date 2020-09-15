@@ -28,14 +28,18 @@ const applyPendingFilter = () => {
     let isResettable = false;
     for (let i=0; i<updatedFilterArray.length; i++) {
       const currentFilter = updatedFilterArray[i];
-      // a filter's original can be empty
-      const original = currentFilter.original.length ? currentFilter.original : currentFilter.choices;
+      const original = currentFilter.original;
       const active = currentFilter.active;
       const hash: {[key: string]: boolean} = {};
 
-      original.forEach(obj => hash[obj.internalName] = false);
-      active.forEach(obj => hash[obj.internalName] = true);
-      isResettable = Object.values(hash).filter(value => !value).length !== 0;
+      // a filter's original can be empty
+      if (!original.length && active.length) {
+        isResettable = true
+      } else {
+        original.forEach(obj => hash[obj.internalName] = false);
+        active.forEach(obj => hash[obj.internalName] = true);
+        isResettable = Object.values(hash).filter(value => !value).length !== 0;
+      }
 
       if (isResettable) break;
     }
