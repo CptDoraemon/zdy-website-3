@@ -47,12 +47,16 @@ const getRequestUrl = (store: FilterTableDefaultState) => {
       value = `${cur.active[0].internalName},${cur.active[1].internalName}`
     } else if (cur.type === FilterTypes.single) {
       value = `${cur.active[0].internalName}`
-    } else if (cur.type === FilterTypes.multiple || cur.type === FilterTypes.multipleTextarea) {
+    } else if (cur.type === FilterTypes.multiple) {
       const selected = cur.active.map(obj => encodeURIComponent(obj.internalName));
-      console.log(selected);
       value = selected.length > 1 ?
         selected.join(',') :
-        `${selected[0]}`
+        `${selected[0]}`;
+    } else if (cur.type === FilterTypes.multipleTextarea) {
+      const selected = cur.active.map(obj => encodeURIComponent(obj.internalName.trim()));
+      value = selected.length > 1 ?
+        selected.join(',') :
+        `${selected[0]}`;
     }
 
     // it's 'undefined' because of encodeURIComponent

@@ -18,13 +18,11 @@ interface FilterMultipleTextareaProps {
 const FilterMultipleTextarea: React.FC<FilterMultipleTextareaProps> = ({filter, updatePendingFilterWithValueArray}) => {
   // const classes = useStyles();
 
-  const [value, setValue] = useState('');
+  const value = filter.pending.map(obj => obj.internalName);
 
   const changeHandler = (e: React.ChangeEvent<any>) => {
-    const value = e.target.value.toString();
-    const array = value.split(',').map((str: string) => str.trim());
-    console.log(array)
-    setValue(value);
+    const newValue = e.target.value.toString();
+    const array = newValue.split(',');
     updatePendingFilterWithValueArray(filter.internalName, array)
   };
 
