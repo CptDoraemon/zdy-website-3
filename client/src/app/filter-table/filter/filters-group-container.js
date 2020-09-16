@@ -7,7 +7,10 @@ function mapDispatchToProps(dispatch) {
     updatePendingFilter: (filterInternalName, choiceInternalName, additionalKey) => dispatch(filterActionsGenerators.updatePendingFilter(filterInternalName, choiceInternalName, additionalKey)),
     updatePendingFilterWithValueArray: (filterInternalName, value) => dispatch(filterActionsGenerators.updatePendingFilterWithValueArray(filterInternalName, value)),
     toggleDropdown: () => dispatch(filterActionsGenerators.toggleDropdown()),
-    applyPendingFilter: () => dispatch(filterActionsGenerators.applyPendingFilter()),
+    applyPendingFilter: (e) => {
+e.preventDefault();
+dispatch(filterActionsGenerators.applyPendingFilter())
+},
     resetFilter: () => dispatch(filterActionsGenerators.resetFilter())
   }
 }
