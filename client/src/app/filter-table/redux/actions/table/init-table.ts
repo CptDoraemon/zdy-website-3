@@ -28,10 +28,16 @@ const initTable = (
 
         const geneSymbolFilter: MultipleFilterTextareaInitializer = {
           type: FilterTypes.multipleTextarea,
-          choices: [],
+          choices: [{
+            internalName: '',
+            displayName: ''
+          }],
           displayName: 'Gene Symbol',
           internalName: 'Gene_symbol',
-          original: []
+          original: [{
+            internalName: '',
+            displayName: ''
+          }]
         };
 
         const sortByOptions: OptionObject = {

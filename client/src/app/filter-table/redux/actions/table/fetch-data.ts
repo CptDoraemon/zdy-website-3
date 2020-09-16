@@ -53,14 +53,15 @@ const getRequestUrl = (store: FilterTableDefaultState) => {
         selected.join(',') :
         `${selected[0]}`;
     } else if (cur.type === FilterTypes.multipleTextarea) {
-      const selected = cur.active.map(obj => encodeURIComponent(obj.internalName.trim()));
+      console.log(cur.active);
+      const selected = cur.active.map(obj => encodeURIComponent((obj.internalName).trim()));
       value = selected.length > 1 ?
         selected.join(',') :
         `${selected[0]}`;
     }
 
-    // it's 'undefined' because of encodeURIComponent
-    return value === 'undefined' ? '' : `${key}=${value}`;
+    // remove the query with empty value like ?key=
+    return value === '' ? '' : `${key}=${value}`;
   })
     .filter(value => value !== '');
 
