@@ -83,6 +83,11 @@ const FiltersGroup = ({
   const classes = useStyles();
   const canApplyNewFilter = !disabled && isPendingApplicable;
 
+  const submit = (e) => {
+    e.preventDefault();
+    applyPendingFilter();
+  };
+
   return (
     <div className={classes.root}>
       <FilterToggleButton dropdown={dropdown} toggleDropdown={toggleDropdown} isActiveFilterDifferentThanDefault={isResettable}/>
@@ -102,7 +107,7 @@ const FiltersGroup = ({
 
               {/* buttons group */}
               <div className={classes.buttonsGroup}>
-                <Button size={'small'} variant="contained" type={'submit'} className={classes.applyButton} disableElevation onClick={applyPendingFilter} disabled={!canApplyNewFilter}>
+                <Button size={'small'} variant="contained" type={'submit'} className={classes.applyButton} disableElevation onClick={submit} disabled={!canApplyNewFilter}>
                   {'Apply new filters'}
                 </Button>
                 <Button size={'small'} variant="contained" className={classes.resetButton} disableElevation onClick={resetFilter} disabled={disabled}>
