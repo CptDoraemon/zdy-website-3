@@ -7,6 +7,10 @@ import { ContributeToDatabaseModule } from './contribute-to-database/contribute-
 import { TableDataModule } from './table-data/table-data.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {TableDataEntity} from "./table-data/table-data.entity";
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import {UserEntity} from "./user/user.entity";
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -26,12 +30,19 @@ import {TableDataEntity} from "./table-data/table-data.entity";
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [TableDataEntity],
+        entities: [
+          TableDataEntity,
+          UserEntity
+        ],
+        synchronize: true
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
     ContributeToDatabaseModule,
     TableDataModule,
+    UserModule,
+    AuthModule,
+    AdminModule,
   ],
   controllers: [AppController],
 })

@@ -9,15 +9,23 @@ export class TableDataEntity {
   @Column()
   'Gene_symbol': string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   'Drug_name': string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   'Drug_type': string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   'disease': string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   'FDA Source': string;
 }

@@ -6,8 +6,7 @@ import {TableDataEntity} from "./table-data.entity";
 @Injectable()
 export class TableDataService {
   constructor(
-    @InjectRepository(TableDataEntity)
-    private repository: Repository<TableDataEntity>,
+    @InjectRepository(TableDataEntity) private repository: Repository<TableDataEntity>,
   ) {}
 
   async getTableData(sortBy, sortOrder, rowPerPage, page, Gene_symbol) {
