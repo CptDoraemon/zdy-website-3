@@ -4,7 +4,8 @@ const urls = {
   tableColumns: '/api/table-data-columns',
   tableColumnOptions: '/api/table-data-column-options',
   registerAdmin: '/api/auth/admin/register',
-  verifyLogin: 'api/auth/ping'
+  verifyLogin: '/api/auth/ping',
+  adminLogin: '/api/auth/admin/login'
 };
 
 if (process.env.REACT_APP_DEBUG === 'true') {

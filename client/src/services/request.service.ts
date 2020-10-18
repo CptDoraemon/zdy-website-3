@@ -1,23 +1,23 @@
 import {makeObservable, observable, computed, action, runInAction} from "mobx"
-import axios from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 
-class GetService<IReturnedData> {
-  private readonly blankErrorMessage = '';
-  private readonly genericErrorMessage = 'server error';
+class RequestService<IReturnedData> {
+  protected readonly blankErrorMessage = '';
+  protected readonly genericErrorMessage = 'server error';
 
   isLoading = false;
   data: IReturnedData | null = null;
   errorMessage = this.blankErrorMessage;
 
   constructor(
-    private url: string
+    protected url: string
   ) {
     makeObservable(this, {
       isLoading: observable,
       data: observable,
       errorMessage: observable,
       isError: computed,
-      doPost: action
+      doRequest: action
     });
   }
 
@@ -30,18 +30,26 @@ class GetService<IReturnedData> {
     this.errorMessage = this.blankErrorMessage;
   }
 
-  async doPost({url}: {url?: string}) {
+  private succeededCallback(data: IReturnedData) {
+    this.data = data
+  }
+
+  async doRequest<T>(axiosConfig: AxiosRequestConfig, callbackOnSucceeded?: (data: T) => void) {
     try {
       if (this.isLoading) return;
       this.isLoading = true;
       this.resetStates();
 
-      const _url = url || this.url; // provide a way to override class url
-      const res = await axios.get(_url);
+      const defaultUrlConfig: AxiosRequestConfig = {url: this.url, withCredentials: true};
+      const config: AxiosRequestConfig = {...defaultUrlConfig, ...axiosConfig};
+      const res = await axios(config);
       const data = res.data;
-      runInAction(() => this.data = data);
+
+      callbackOnSucceeded ?
+        runInAction(() => callbackOnSucceeded(data)) :
+        runInAction(() => this.succeededCallback(data));
     } catch (e) {
-      console.log('PostServiceError', e);
+      console.log('RequestServiceError', e);
       const newErrorMessage = e?.response?.data?.message || this.genericErrorMessage;
       runInAction(() => this.errorMessage = newErrorMessage);
     } finally {
@@ -50,4 +58,4 @@ class GetService<IReturnedData> {
   }
 }
 
-export default GetService
+export default RequestService

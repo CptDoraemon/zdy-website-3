@@ -1,39 +1,37 @@
-import {makeObservable, observable, computed, action, observe} from "mobx"
-import GetService from "./get.service";
-import PostService from "./post.service";
+import {makeObservable, observable, computed, action, observe, runInAction} from "mobx"
 import urls from "./urls";
+import {AxiosRequestConfig} from "axios";
+import RequestService from "./request.service";
 
 interface IVerifyLoginResponse {
   username: string,
-
+  isAdmin: boolean
 }
 
-class AccountService {
-  private readonly defaultErrorMessage = '';
-  private readonly verifyLoginService = new GetService(urls.verifyLogin);
-
+class AccountService extends RequestService<any> {
   isLogin = false;
   isAdmin = false;
-  isLoading = false;
-  errorMessage = this.defaultErrorMessage;
+  username = '';
 
   constructor() {
+    super('');
+
     makeObservable(this, {
       isLogin: observable,
       isAdmin: observable,
-      isLoading: observable,
-      errorMessage: observable,
-      isError: computed,
-      verifyLogin: action
     });
   }
 
-  get isError() {
-    return this.errorMessage !== this.defaultErrorMessage
-  }
-
-  verifyLogin() {
-
+  async verifyLogin() {
+    const config: AxiosRequestConfig = {url: urls.verifyLogin, method: 'GET'};
+    const callbackOnSucceeded = (data: IVerifyLoginResponse) => {
+      runInAction(() => {
+        this.isLogin = true;
+        this.isAdmin = data.isAdmin;
+        this.username = data.username;
+      });
+    };
+    await this.doRequest<IVerifyLoginResponse>(config, callbackOnSucceeded);
   }
 }
 

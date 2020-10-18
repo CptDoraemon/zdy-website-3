@@ -11,6 +11,7 @@ class InputService {
   constructor(
     private validator: Validator,
     public inputLabel: string,
+    public name: string,
     public type?: string
   ) {
     makeObservable(this, {

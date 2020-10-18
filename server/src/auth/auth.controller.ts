@@ -3,6 +3,7 @@ import {AdminLoginGuard} from '../common/guards/adminLogin.guard';
 import {AdminRegisterRequestDto} from "./dto/admin-register.dto";
 import {AuthService} from "./auth.service";
 import {LoginGuard} from "../common/guards/login.guard";
+import {AuthenticatedGuard} from "../common/guards/authenticated.guard";
 
 @Controller('auth')
 export class AuthController {
@@ -11,7 +12,7 @@ export class AuthController {
     private authService: AuthService
   ) {}
 
-  @UseGuards(LoginGuard)
+  @UseGuards(AuthenticatedGuard)
   @Get('/ping')
   ping(@Request() request) {
     return {

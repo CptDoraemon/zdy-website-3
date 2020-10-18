@@ -58,8 +58,6 @@ interface FormProps {
 const Form: React.FC<FormProps> = observer(({title, buttonText, fields, onSubmit, request}) => {
   const classes = useStyles();
 
-  console.log(request.errorMessage, request.isError);
-
   return (
     <div className={classes.root}>
       <h2 className={classes.title}>

@@ -1,12 +1,15 @@
 const navTabs = {
-  home: '/',
+  landingPage: '/',
+  home: '/home',
   search: '/search',
   browse: '/browse',
   download: '/download',
   submission: '/submission',
   contact: '/contact',
   help: '/help',
-  adminRegister: '/admin/admin-register'
+  adminRegister: '/admin/register',
+  adminLogin: '/admin/login',
+  fallback: '/*'
 };
 
 export const navTabsDataForHeader = Object.keys(navTabs).map(key => ({
