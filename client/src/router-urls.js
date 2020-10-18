@@ -5,7 +5,8 @@ const navTabs = {
   download: '/download',
   submission: '/submission',
   contact: '/contact',
-  help: '/help'
+  help: '/help',
+  adminRegister: '/admin/admin-register'
 };
 
 export const navTabsDataForHeader = Object.keys(navTabs).map(key => ({

@@ -22,6 +22,7 @@ import SearchRowDetail from "./pages/search/search-row-detail";
 import Browse from "./pages/browse/browse";
 import Submission from "./pages/submission/submission";
 import Footer from "./components/footer/footer";
+import AdminRegister from "./admin-pages/admin-register";
 
 const store = configureStore();
 const tableStore = configureTableStore();
@@ -54,6 +55,7 @@ const InnerApp = () => {
             <Route path={routerUrls.searchRowDetail.route} exact render={ (props) => <SearchRowDetail id={props.match.params.id} goBack={props.history.goBack}/> } />
             <Route path={routerUrls.browse} exact render={ () => <Browse /> } />
             <Route path={routerUrls.submission} exact render={ () => <Submission /> } />
+            <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />
           </Switch>
         </MainWrapper>
         <Footer/>
