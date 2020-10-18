@@ -11,6 +11,15 @@ export class AuthController {
     private authService: AuthService
   ) {}
 
+  @UseGuards(LoginGuard)
+  @Get('/ping')
+  ping(@Request() request) {
+    return {
+      username: request.user.username,
+      isAdmin: request.user.isAdmin
+    }
+  }
+
   @Post('/admin/register')
   async adminRegister(
     @Body() form: AdminRegisterDto,
@@ -28,5 +37,16 @@ export class AuthController {
   @Post('/login')
   login(@Request() request) {
     return {username: request.user.username}
+  }
+
+  @Post('/logout')
+  logout(@Request() request) {
+    // get or post?
+    // https://stackoverflow.com/questions/3521290/logout-get-or-post
+
+    if (request.isAuthenticated()) {
+      request.user.logOut()
+    }
+    return {status: 'ok'}
   }
 }
