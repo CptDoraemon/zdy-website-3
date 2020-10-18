@@ -40,7 +40,7 @@ export class AuthService {
   async registerAdmin(username: string, password: string, token: string): Promise<any> {
     // verify token
     const isTokenValid = token === this.configService.get<string>('ADMIN_TOKEN');
-    if (!isTokenValid) throw new ForbiddenException();
+    if (!isTokenValid) throw new ForbiddenException({message: 'not authorized'});
 
     // create admin
     return await this.userService.createUser(username, password, true);

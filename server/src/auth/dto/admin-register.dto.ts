@@ -1,6 +1,6 @@
 import {MinLength, MaxLength} from "class-validator";
 
-export class AdminRegisterDto {
+export class AdminRegisterRequestDto {
   @MinLength(5)
   @MaxLength(20)
   username: string;

@@ -2,7 +2,7 @@ import { makeObservable, observable, computed, action } from "mobx"
 
 export type Validator = (value: string) => string | null
 
-class Input {
+class InputService {
   blankErrorMessage = '';
 
   value = '';
@@ -10,7 +10,8 @@ class Input {
 
   constructor(
     private validator: Validator,
-    public inputLabel: string
+    public inputLabel: string,
+    public type?: string
   ) {
     makeObservable(this, {
       value: observable,
@@ -35,4 +36,4 @@ class Input {
   }
 }
 
-export default Input
+export default InputService

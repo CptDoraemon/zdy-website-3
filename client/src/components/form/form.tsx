@@ -1,15 +1,17 @@
 import React, {FormEvent} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Button, TextField} from "@material-ui/core";
-import Input from "../../services/form/input";
-import Post from "../../services/post";
+import InputService from "../../services/form/input.service";
+import PostService from "../../services/post.service";
+import {observer} from "mobx-react";
 
+const rowWidth = 300;
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
   title: {
-    minWidth: 300,
+    minWidth: rowWidth,
     textAlign: 'center',
     textTransform: 'capitalize',
     fontSize: theme.typography.h5.fontSize,
@@ -23,15 +25,22 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start'
   },
   textField: {
-    minWidth: 300,
+    minWidth: rowWidth,
     maxWidth: '100%'
+  },
+  errorMessage: {
+    color: theme.palette.error.main,
+    textTransform: 'capitalize',
+    textAlign: 'center',
+    fontWeight: 700
   },
   button: {
     backgroundColor: theme.palette.success.main,
     color: theme.palette.success.contrastText,
-    minWidth: 300,
+    minWidth: rowWidth,
     maxWidth: '100%',
     margin: theme.spacing(1, 0),
+    fontWeight: 700,
     '&:hover': {
       backgroundColor: theme.palette.success.light,
     }
@@ -42,12 +51,14 @@ interface FormProps {
   title: string,
   buttonText: string,
   onSubmit: (e: FormEvent) => void,
-  fields: Input[],
-  request: Post<any>
+  fields: InputService[],
+  request: PostService<any, any>
 }
 
-const Form: React.FC<FormProps> = ({title, buttonText, fields, onSubmit, request}) => {
+const Form: React.FC<FormProps> = observer(({title, buttonText, fields, onSubmit, request}) => {
   const classes = useStyles();
+
+  console.log(request.errorMessage, request.isError);
 
   return (
     <div className={classes.root}>
@@ -59,17 +70,20 @@ const Form: React.FC<FormProps> = ({title, buttonText, fields, onSubmit, request
           fields.map(item => (
             <TextField key={item.inputLabel} variant={'outlined'} label={item.inputLabel} value={item.value}
                        error={item.isError} helperText={item.errorMessage || "\u00a0"}
-                       className={classes.textField}
+                       className={classes.textField} type={item.type || 'text'}
                        onChange={(e) => item.updateValue(e.target.value)}
             />
           ))
         }
+        <div className={classes.errorMessage}>
+          { request.isError ? request.errorMessage : "\u00a0" }
+        </div>
         <Button variant="contained" className={classes.button} disableElevation disabled={request.isLoading} type={'submit'}>
           {buttonText}
         </Button>
       </form>
     </div>
   )
-};
+});
 
 export default Form

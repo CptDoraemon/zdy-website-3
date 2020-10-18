@@ -2,7 +2,9 @@ const urls = {
   contributeToDatabase: '/api/contribute-to-database',
   tableData: '/api/table-data',
   tableColumns: '/api/table-data-columns',
-  tableColumnOptions: '/api/table-data-column-options'
+  tableColumnOptions: '/api/table-data-column-options',
+  registerAdmin: '/api/auth/admin/register',
+  verifyLogin: 'api/auth/ping'
 };
 
 if (process.env.REACT_APP_DEBUG === 'true') {

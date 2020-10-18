@@ -1,4 +1,4 @@
-import {Validator} from "./input";
+import {Validator} from "./input.service";
 
 const simpleValidator: Validator = (value: string) => {
   if (value.length < 5) {

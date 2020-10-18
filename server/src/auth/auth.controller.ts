@@ -1,6 +1,6 @@
-import {Controller, Get, Post, Request, Res, Render, UseGuards, Body} from '@nestjs/common';
+import {Controller, Get, Post, Request, UseGuards, Body} from '@nestjs/common';
 import {AdminLoginGuard} from '../common/guards/adminLogin.guard';
-import {AdminRegisterDto} from "./dto/admin-register.dto";
+import {AdminRegisterRequestDto} from "./dto/admin-register.dto";
 import {AuthService} from "./auth.service";
 import {LoginGuard} from "../common/guards/login.guard";
 
@@ -22,9 +22,14 @@ export class AuthController {
 
   @Post('/admin/register')
   async adminRegister(
-    @Body() form: AdminRegisterDto,
+    @Request() request,
+    @Body() form: AdminRegisterRequestDto,
   ) {
-    return await this.authService.registerAdmin(form.username, form.password, form.token)
+    const createdUser = await this.authService.registerAdmin(form.username, form.password, form.token);
+    await request.login();
+    return {
+      username: createdUser.username
+    }
   }
 
   @UseGuards(AdminLoginGuard)
@@ -40,12 +45,12 @@ export class AuthController {
   }
 
   @Post('/logout')
-  logout(@Request() request) {
+  async logout(@Request() request) {
     // get or post?
     // https://stackoverflow.com/questions/3521290/logout-get-or-post
 
     if (request.isAuthenticated()) {
-      request.user.logOut()
+      await request.logout()
     }
     return {status: 'ok'}
   }
