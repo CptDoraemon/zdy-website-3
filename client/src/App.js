@@ -23,10 +23,14 @@ import Browse from "./pages/browse/browse";
 import Submission from "./pages/submission/submission";
 import Footer from "./components/footer/footer";
 import AdminRegister from "./admin-pages/admin-register";
-import AccountService from "./services/account.service";
+import AccountService from "./context/account.service";
 import LandingPage from "./pages/landing-page/landing-page";
 import {observer} from "mobx-react";
 import AdminLogin from "./admin-pages/admin-login";
+import AccountContext from "./context/account-context";
+import LoginRequired from "./protected-routes/login-required";
+import AdminRequired from "./protected-routes/admin-required";
+import AdminHome from "./admin-pages/admin-home";
 
 const store = configureStore();
 const tableStore = configureTableStore();
@@ -50,24 +54,27 @@ const InnerApp = observer(() => {
 
   return (
     <div className={classes.root}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <RouterScrollRestoration />
-        <Header data={navTabsDataForHeader} homeLink={routerUrls.home}/>
-        <MainWrapper>
-          <Switch>
-            <Route path={routerUrls.landingPage} exact render={ () => <LandingPage accountService={accountService}/> } />
-            <Route path={routerUrls.home} exact render={ () => <Home/> } />
-            <Route path={routerUrls.search} exact render={ () => <Search store={tableStore}/> } />
-            <Route path={routerUrls.searchRowDetail.route} exact render={ (props) => <SearchRowDetail id={props.match.params.id} goBack={props.history.goBack}/> } />
-            <Route path={routerUrls.browse} exact render={ () => <Browse /> } />
-            <Route path={routerUrls.submission} exact render={ () => <Submission /> } />
-            <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />
-            <Route path={routerUrls.adminLogin} exact render={ () => <AdminLogin/> } />
-            <Route path={routerUrls.fallback} exact render={ () => <LandingPage accountService={accountService}/> } />
-          </Switch>
-        </MainWrapper>
-        <Footer/>
-      </Router>
+      <AccountContext.Provider value={accountService}>
+        <Router basename={process.env.PUBLIC_URL}>
+          <RouterScrollRestoration />
+          <Header data={navTabsDataForHeader} homeLink={routerUrls.home}/>
+          <MainWrapper>
+            <Switch>
+              <Route path={routerUrls.landingPage} exact render={ () => <LandingPage/> } />
+              <LoginRequired path={routerUrls.home} exact render={ () => <Home/> } />
+              <LoginRequired path={routerUrls.search} exact render={ () => <Search store={tableStore}/> } />
+              <LoginRequired path={routerUrls.searchRowDetail.route} exact render={ (props) => <SearchRowDetail id={props.match.params.id} goBack={props.history.goBack}/> } />
+              <LoginRequired path={routerUrls.browse} exact render={ () => <Browse /> } />
+              <LoginRequired path={routerUrls.submission} exact render={ () => <Submission /> } />
+              <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />
+              <Route path={routerUrls.adminLogin} exact render={ () => <AdminLogin/> } />
+              <AdminRequired path={routerUrls.adminHome} exact render={ () => <AdminHome/> } />
+              <Route path={routerUrls.fallback} exact render={ () => <LandingPage/> } />
+            </Switch>
+          </MainWrapper>
+          <Footer/>
+        </Router>
+      </AccountContext.Provider>
     </div>
   );
 });

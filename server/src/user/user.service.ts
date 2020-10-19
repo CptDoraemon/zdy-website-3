@@ -46,7 +46,7 @@ export class UserService {
   async deleteUsers(username: string) {
     // check if user exists
     const user = await this.findOne(username);
-    if (user) throw new BadRequestException('user exists');
+    if (!user) throw new BadRequestException('no such user');
 
     await this.repository.delete(user);
     return true

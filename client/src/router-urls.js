@@ -9,6 +9,7 @@ const navTabs = {
   help: '/help',
   adminRegister: '/admin/register',
   adminLogin: '/admin/login',
+  adminHome: '/admin/home',
   fallback: '/*'
 };
 

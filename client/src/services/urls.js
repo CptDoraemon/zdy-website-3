@@ -5,7 +5,10 @@ const urls = {
   tableColumnOptions: '/api/table-data-column-options',
   registerAdmin: '/api/auth/admin/register',
   verifyLogin: '/api/auth/ping',
-  adminLogin: '/api/auth/admin/login'
+  adminLogin: '/api/auth/admin/login',
+  adminGetAllUsers: '/api/admin/all-users',
+  adminDeleteUser: '/api/admin/delete-user',
+  adminCreateUser: '/api/admin/create-user'
 };
 
 if (process.env.REACT_APP_DEBUG === 'true') {

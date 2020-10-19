@@ -3,10 +3,10 @@ import RequestService from "./request.service";
 
 class PostService<IBody, IReturnedData> extends RequestService<IReturnedData> {
 
-  async doPost({url, body}: {url?: string, body: IBody}) {
+  async doPost({url, body, callbackOnSucceeded}: {url?: string, body: IBody, callbackOnSucceeded?: () => void}) {
     const config: AxiosRequestConfig = {data: body, method: 'POST'};
     if (url) config.url = url;
-    this.doRequest(config)
+    this.doRequest(config, callbackOnSucceeded)
   }
 
 }

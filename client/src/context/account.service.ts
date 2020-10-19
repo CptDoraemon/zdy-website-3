@@ -1,7 +1,7 @@
 import {makeObservable, observable, computed, action, observe, runInAction} from "mobx"
-import urls from "./urls";
+import urls from "../services/urls";
 import {AxiosRequestConfig} from "axios";
-import RequestService from "./request.service";
+import RequestService from "../services/request.service";
 
 interface IVerifyLoginResponse {
   username: string,

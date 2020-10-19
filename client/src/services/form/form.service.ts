@@ -26,7 +26,7 @@ class FormService<IBody, IResponse> {
     return isError
   };
 
-  submit(e: FormEvent) {
+  async submit(e: FormEvent) {
     e.preventDefault();
     const isError = this.validateAllInputs();
     if (!isError) {
@@ -34,7 +34,7 @@ class FormService<IBody, IResponse> {
       // @ts-ignore
       this.fields.forEach(field => body[field.name] = field.value);
       // @ts-ignore
-      this.request.doPost({body})
+      await this.request.doPost({body})
     }
   }
 }

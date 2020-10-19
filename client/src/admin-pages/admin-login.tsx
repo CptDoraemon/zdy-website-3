@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { observer } from "mobx-react"
 import Form from "../components/form/form";
 import FormService from "../services/form/form.service";
@@ -34,14 +34,21 @@ const AdminLogin = observer(() => {
 
   // redirect after login
   const history = useHistory();
+  const mountedRef = useRef(false);
   useEffect(() => {
-    autorun(() => {
-      const loginSucceeded = service.request.data !== null;
-      if (loginSucceeded) {
-        history.replace(routerUrls.landingPage);
+    if (!mountedRef.current) {
+      const disposer = autorun(() => {
+        const loginSucceeded = service.request.data !== null;
+        if (loginSucceeded) {
+          history.replace(routerUrls.landingPage);
+        }
+      });
+      mountedRef.current = true;
+      return () => {
+        disposer();
       }
-    });
-  });
+    }
+  }, [history, service.request.data]);
 
   return (
     <Form title={service.title} buttonText={service.buttonText} onSubmit={service.submit} fields={service.fields} request={service.request}/>
