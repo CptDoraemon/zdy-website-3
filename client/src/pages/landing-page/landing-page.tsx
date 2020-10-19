@@ -35,24 +35,14 @@ const LandingPage: React.FC<LandingPageProps> = observer(() => {
 
   if (!accountContext.isLogin) {
     // Not logged in -> redirect to login page
-    return (
-      <div>
-        login
-      </div>
-    )
+    return <Redirect to={routerUrls.login}/>
   } else {
     if (accountContext.isAdmin) {
       // logged in as admin -> redirect to admin home page
-      return (
-        <Redirect to={routerUrls.adminHome}/>
-      )
+      return <Redirect to={routerUrls.adminHome}/>
     } else {
       // logged in as normal user -> redirect to home page
-      return (
-        <div className={classes.root}>
-          home
-        </div>
-      )
+      return <Redirect to={routerUrls.home}/>
     }
   }
 });

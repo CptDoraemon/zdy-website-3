@@ -33,11 +33,11 @@ export class AuthController {
     }
   }
 
-  @UseGuards(AdminLoginGuard)
-  @Post('/admin/login')
-  adminLogin(@Request() request) {
-    return {username: request.user.username}
-  }
+  // @UseGuards(AdminLoginGuard)
+  // @Post('/admin/login')
+  // adminLogin(@Request() request) {
+  //   return {username: request.user.username}
+  // }
 
   @UseGuards(LoginGuard)
   @Post('/login')

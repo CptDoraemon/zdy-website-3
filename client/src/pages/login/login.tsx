@@ -1,14 +1,14 @@
 import React, {useEffect, useRef, useState} from "react";
 import { observer } from "mobx-react"
-import Form from "../components/form/form";
-import FormService from "../services/form/form.service";
-import PostService from "../services/post.service";
-import urls from "../services/urls";
-import InputService from "../services/form/input.service";
-import simpleValidator from "../services/form/simple-validator";
+import Form from "../../components/form/form";
+import FormService from "../../services/form/form.service";
+import PostService from "../../services/post.service";
+import urls from "../../services/urls";
+import InputService from "../../services/form/input.service";
+import simpleValidator from "../../services/form/simple-validator";
 import { useHistory } from "react-router-dom";
 import {autorun} from "mobx";
-import routerUrls from "../router-urls";
+import routerUrls from "../../router-urls";
 
 interface IBody {
   username: string,
@@ -19,12 +19,12 @@ interface IResponse {
   username: string
 }
 
-const AdminLogin = observer(() => {
+const Login = observer(() => {
   const [service] = useState(() => {
     return new FormService(
-      'Admin Login',
+      'Login',
       'login',
-      new PostService<IBody, IResponse>(urls.adminLogin),
+      new PostService<IBody, IResponse>(urls.login),
       [
         new InputService(simpleValidator, 'username', 'username'),
         new InputService(simpleValidator, 'password', 'password','password')
@@ -55,4 +55,4 @@ const AdminLogin = observer(() => {
   )
 });
 
-export default AdminLogin
+export default Login

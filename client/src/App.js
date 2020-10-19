@@ -26,11 +26,12 @@ import AdminRegister from "./admin-pages/admin-register";
 import AccountService from "./context/account.service";
 import LandingPage from "./pages/landing-page/landing-page";
 import {observer} from "mobx-react";
-import AdminLogin from "./admin-pages/admin-login";
 import AccountContext from "./context/account-context";
 import LoginRequired from "./protected-routes/login-required";
 import AdminRequired from "./protected-routes/admin-required";
 import AdminHome from "./admin-pages/admin-home";
+import Logout from "./pages/logout/logout";
+import Login from "./pages/login/login";
 
 const store = configureStore();
 const tableStore = configureTableStore();
@@ -66,8 +67,10 @@ const InnerApp = observer(() => {
               <LoginRequired path={routerUrls.searchRowDetail.route} exact render={ (props) => <SearchRowDetail id={props.match.params.id} goBack={props.history.goBack}/> } />
               <LoginRequired path={routerUrls.browse} exact render={ () => <Browse /> } />
               <LoginRequired path={routerUrls.submission} exact render={ () => <Submission /> } />
+              <LoginRequired path={routerUrls.contact} exact render={ () => <div>contact</div> } />
+              <LoginRequired path={routerUrls.logout} exact render={ () => <Logout /> } />
+              <Route path={routerUrls.login} exact render={ () => <Login/> } />
               <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />
-              <Route path={routerUrls.adminLogin} exact render={ () => <AdminLogin/> } />
               <AdminRequired path={routerUrls.adminHome} exact render={ () => <AdminHome/> } />
               <Route path={routerUrls.fallback} exact render={ () => <LandingPage/> } />
             </Switch>

@@ -33,6 +33,18 @@ class AccountService extends RequestService<any> {
     };
     await this.doRequest<IVerifyLoginResponse>(config, callbackOnSucceeded);
   }
+
+  async logout() {
+    const config: AxiosRequestConfig = {url: urls.logout, method: 'POST'};
+    const callbackOnSucceeded = (data: any) => {
+      runInAction(() => {
+        this.isLogin = false;
+        this.isAdmin = false;
+        this.username = '';
+      });
+    };
+    await this.doRequest(config, callbackOnSucceeded);
+  }
 }
 
 export default AccountService
