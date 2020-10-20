@@ -1,5 +1,5 @@
-import {Controller, Get, Post, Request, UseGuards, Body} from '@nestjs/common';
-import {AdminLoginGuard} from '../common/guards/adminLogin.guard';
+import {Controller, Get, Post, Request, UseGuards, Body, Next} from '@nestjs/common';
+import {Request as ExpressRequest} from 'express';
 import {AdminRegisterRequestDto} from "./dto/admin-register.dto";
 import {AuthService} from "./auth.service";
 import {LoginGuard} from "../common/guards/login.guard";
@@ -11,6 +11,16 @@ export class AuthController {
   constructor(
     private authService: AuthService
   ) {}
+
+  private passportLogin(user: any, request: ExpressRequest) {
+    return new Promise((resolve, reject) => {
+      request.login(user, (err) => {
+        console.log(err);
+        if (err) return reject(err);
+        resolve(true)
+      });
+    })
+  }
 
   @UseGuards(AuthenticatedGuard)
   @Get('/ping')
@@ -24,10 +34,10 @@ export class AuthController {
   @Post('/admin/register')
   async adminRegister(
     @Request() request,
-    @Body() form: AdminRegisterRequestDto,
+    @Body() form: AdminRegisterRequestDto
   ) {
     const createdUser = await this.authService.registerAdmin(form.username, form.password, form.token);
-    await request.login();
+    await this.passportLogin(createdUser, request);
     return {
       username: createdUser.username
     }

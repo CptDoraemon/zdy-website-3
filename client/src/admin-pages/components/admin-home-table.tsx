@@ -19,6 +19,13 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.h5.fontSize,
     textTransform: 'capitalize',
     fontWeight: 700
+  },
+  headerRow: {
+    textTransform: 'capitalize',
+    fontWeight: 700
+  },
+  deleteIcon: {
+    color: theme.palette.warning.main
   }
 }));
 
@@ -59,7 +66,7 @@ const AdminHomeTable = observer<React.FC<AdminHomeTableProps>>(({data, handleDel
           <TableHead>
             <TableRow>
               {
-                headers.map(cell => <TableCell key={cell}>{cell}</TableCell>)
+                headers.map(cell => <TableCell key={cell} className={classes.headerRow}>{cell}</TableCell>)
               }
             </TableRow>
           </TableHead>
@@ -71,7 +78,7 @@ const AdminHomeTable = observer<React.FC<AdminHomeTableProps>>(({data, handleDel
                 }
                 <TableCell>
                   <IconButton aria-label="delete user" disabled={isDeleteDisabled} onClick={() => handleDeleteUser(row.username)}>
-                    <DeleteIcon />
+                    <DeleteIcon className={classes.deleteIcon}/>
                   </IconButton>
                 </TableCell>
               </TableRow>

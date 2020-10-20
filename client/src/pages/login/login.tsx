@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import { observer } from "mobx-react"
 import Form from "../../components/form/form";
 import FormService from "../../services/form/form.service";
@@ -6,9 +6,7 @@ import PostService from "../../services/post.service";
 import urls from "../../services/urls";
 import InputService from "../../services/form/input.service";
 import simpleValidator from "../../services/form/simple-validator";
-import { useHistory } from "react-router-dom";
-import {autorun} from "mobx";
-import routerUrls from "../../router-urls";
+import useRedirectWhenValueNotNull from "../../utils/use-redirect-on-change";
 
 interface IBody {
   username: string,
@@ -32,23 +30,7 @@ const Login = observer(() => {
     )
   });
 
-  // redirect after login
-  const history = useHistory();
-  const mountedRef = useRef(false);
-  useEffect(() => {
-    if (!mountedRef.current) {
-      const disposer = autorun(() => {
-        const loginSucceeded = service.request.data !== null;
-        if (loginSucceeded) {
-          history.replace(routerUrls.landingPage);
-        }
-      });
-      mountedRef.current = true;
-      return () => {
-        disposer();
-      }
-    }
-  }, [history, service.request.data]);
+  useRedirectWhenValueNotNull(() => service.request.data);
 
   return (
     <Form title={service.title} buttonText={service.buttonText} onSubmit={service.submit} fields={service.fields} request={service.request}/>

@@ -19,12 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: theme.spacing(0, 2, 0, 0),
-    flexGrow: 1,
     fontWeight: 700,
     fontSize: '1.25rem'
-  },
-  buttonGroup: {
-
   },
   activeTab: {
     '&:visited': {
@@ -54,15 +50,22 @@ const useStyles = makeStyles((theme) => ({
   },
   desktopTabs: {
     display: 'block',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'none',
     }
   },
   mobileTabs: {
     display: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'block',
     }
+  },
+  buttonGroup: {
+    flex: '1 0 auto',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   }
 }));
 
@@ -120,7 +123,9 @@ const Header = observer<React.FC<HeaderProps>>(({data, homeLink}) => {
         <div className={classes.desktopTabs}>
           {tabs}
         </div>
-        <HeaderButtonGroup/>
+        <div className={classes.buttonGroup}>
+          <HeaderButtonGroup/>
+        </div>
       </Toolbar>
       <div className={classes.mobileTabs}>
         {tabs}
