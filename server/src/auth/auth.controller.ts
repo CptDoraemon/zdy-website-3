@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Request, UseGuards, Body, Next} from '@nestjs/common';
+import {Controller, Get, Post, Request, UseGuards, Body, Next, BadRequestException} from '@nestjs/common';
 import {Request as ExpressRequest} from 'express';
 import {AdminRegisterRequestDto} from "./dto/admin-register.dto";
 import {AuthService} from "./auth.service";
@@ -7,6 +7,9 @@ import {AuthenticatedGuard} from "../common/guards/authenticated.guard";
 
 @Controller('auth')
 export class AuthController {
+
+  private adminRegisterTimeWindowStart = 0;
+  private adminRegisterCallCount = 0;
 
   constructor(
     private authService: AuthService
@@ -36,6 +39,23 @@ export class AuthController {
     @Request() request,
     @Body() form: AdminRegisterRequestDto
   ) {
+    // throttling
+    const now = Date.now();
+    const sinceTimeWindowStart = Math.round((now - this.adminRegisterTimeWindowStart) / 1000);
+    const timeWindow = 60; // seconds
+    const maxAttempts = 3;
+    const isCalledRecently = sinceTimeWindowStart < timeWindow;
+    this.adminRegisterCallCount++;
+    if (isCalledRecently) {
+      if (this.adminRegisterCallCount > maxAttempts) {
+        const coolDown = timeWindow - sinceTimeWindowStart;
+        throw new BadRequestException({message: `try again in ${coolDown} ${coolDown === 0 || coolDown === 1 ? 'second' : 'seconds'}`})
+      }
+    } else {
+      this.adminRegisterTimeWindowStart = now;
+      this.adminRegisterCallCount = 1;
+    }
+
     const createdUser = await this.authService.registerAdmin(form.username, form.password, form.token);
     await this.passportLogin(createdUser, request);
     return {
