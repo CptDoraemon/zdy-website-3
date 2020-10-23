@@ -1,7 +1,6 @@
-import {Controller, Get, Query, Req} from '@nestjs/common';
+import {Controller, Get, Query, Req, Response} from '@nestjs/common';
 import {SuccessResponse} from "../utils/response-template";
 import {TableDataDto} from "./table-data.dto";
-import { Request } from 'express';
 import {TableDataService} from "./table-data.service";
 import {TableDataQueryDto} from "./table-data-query.dto";
 
@@ -12,7 +11,7 @@ export class TableDataController {
 
   @Get()
   async getData(
-    @Req() req: Request,
+    @Req() req,
     @Query() query: TableDataQueryDto
   ): Promise<SuccessResponse<TableDataDto>> {
 
@@ -56,5 +55,10 @@ export class TableDataController {
         options
       },
     };
+  }
+
+  @Get('/csv')
+  async getCsv(@Response() res) {
+    res.download(this.tableDataService.csvFilePath)
   }
 }

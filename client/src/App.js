@@ -19,7 +19,6 @@ import MainWrapper from "./components/main-wrapper/main-wrapper";
 import Home from "./pages/home/home";
 import Search from "./pages/search/search";
 import SearchRowDetail from "./pages/search/search-row-detail";
-import Browse from "./pages/browse/browse";
 import Submission from "./pages/submission/submission";
 import Footer from "./components/footer/footer";
 import AdminRegister from "./admin-pages/admin-register";
@@ -65,7 +64,6 @@ const InnerApp = observer(() => {
               <LoginRequired path={routerUrls.home} exact render={ () => <Home/> } />
               <LoginRequired path={routerUrls.search} exact render={ () => <Search store={tableStore}/> } />
               <LoginRequired path={routerUrls.searchRowDetail.route} exact render={ (props) => <SearchRowDetail id={props.match.params.id} goBack={props.history.goBack}/> } />
-              <LoginRequired path={routerUrls.browse} exact render={ () => <Browse /> } />
               <LoginRequired path={routerUrls.submission} exact render={ () => <Submission /> } />
               <LoginRequired path={routerUrls.contact} exact render={ () => <div>contact</div> } />
               <LoginRequired path={routerUrls.logout} exact render={ () => <Logout /> } />

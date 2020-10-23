@@ -1,6 +1,7 @@
 const urls = {
   contributeToDatabase: '/api/contribute-to-database',
   tableData: '/api/table-data',
+  tableDataCsv: '/api/table-data/csv',
   tableColumns: '/api/table-data/columns',
   tableColumnOptions: '/api/table-data/column-options',
   registerAdmin: '/api/auth/admin/register',

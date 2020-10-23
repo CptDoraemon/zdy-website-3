@@ -19,7 +19,7 @@ const routes = {
 //   title: string,
 //   link: string
 // }[];
-const _navTabsDataForHeader = ['home', 'search', 'browse', 'submission', 'contact'];
+const _navTabsDataForHeader = ['home', 'search', 'submission', 'contact'];
 export const navTabsDataForHeader = (() => {
   return _navTabsDataForHeader.map(key => ({
     title: key,

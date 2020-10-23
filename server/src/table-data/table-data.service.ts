@@ -2,12 +2,36 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {Repository, In, getConnection} from 'typeorm';
 import {TableDataEntity} from "./table-data.entity";
+import {OnApplicationBootstrap} from "@nestjs/common";
+import * as fs from 'fs';
+import * as path from 'path';
+import * as csv from 'fast-csv';
 
 @Injectable()
-export class TableDataService {
+export class TableDataService implements OnApplicationBootstrap {
+
+  public readonly csvFilePath = path.join(__dirname, 'table-data.csv');
+
   constructor(
     @InjectRepository(TableDataEntity) private repository: Repository<TableDataEntity>,
   ) {}
+
+  async onApplicationBootstrap() {
+    const generateCsvFile = (data, stream) => {
+      return new Promise((resolve) => {
+        csv
+          .write(data, { headers: true, writeBOM: true })
+          .on("finish", function() {
+            console.log("table data csv generated");
+            return resolve(true)
+          })
+          .pipe(stream);
+      })
+    };
+    const ws = fs.createWriteStream(this.csvFilePath, {encoding: 'utf8'});
+    const jsonData = await this.repository.find();
+    await generateCsvFile(jsonData, ws);
+  }
 
   async getTableData(sortBy, sortOrder, rowPerPage, page, Gene_symbol) {
     const skip = (page - 1) * rowPerPage;

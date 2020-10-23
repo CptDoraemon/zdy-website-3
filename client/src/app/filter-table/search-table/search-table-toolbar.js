@@ -3,6 +3,9 @@ import React, {useMemo} from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import {primaryButtonStyles} from "../../../styles";
+import urls from "../../../services/urls";
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +27,7 @@ const useToolbarStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.dark,
       },
   titleWrapper: {
+    flex: 1,
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(1, 0)
     }
@@ -35,6 +39,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   text: {
     fontWeight: 700
   },
+  downloadButton: {
+    ...primaryButtonStyles(theme).root,
+    fontSize: theme.typography.caption.fontSize,
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(1, 0)
+    }
+  }
 }));
 
 const SearchTableToolbar = ({selected, title, totalRows}) => {
@@ -64,6 +75,9 @@ const SearchTableToolbar = ({selected, title, totalRows}) => {
           </div>
         )}
       </div>
+      <Button component={'a'} className={classes.downloadButton} size={'small'} variant="contained" disableElevation href={urls.tableDataCsv}>
+        Download csv
+      </Button>
     </Toolbar>
   );
 };
