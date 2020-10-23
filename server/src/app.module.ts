@@ -42,7 +42,7 @@ import { AdminModule } from './admin/admin.module';
     TableDataModule,
     UserModule,
     AuthModule,
-    AdminModule,
+    AdminModule
   ],
   controllers: [AppController],
 })

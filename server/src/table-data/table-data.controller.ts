@@ -29,4 +29,32 @@ export class TableDataController {
       },
     };
   }
+
+  @Get('/columns')
+  async columns(): Promise<SuccessResponse<TableDataDto>> {
+
+    const columns = await this.tableDataService.getTableColumns();
+
+    return {
+      status: 'ok',
+      data: {
+        columns
+      },
+    };
+  }
+
+  @Get('/column-options')
+  async columnOptions(
+    @Query('column') column: string
+  ): Promise<SuccessResponse<TableDataDto>> {
+
+    const options = await this.tableDataService.getColumnOptions(column);
+
+    return {
+      status: 'ok',
+      data: {
+        options
+      },
+    };
+  }
 }
