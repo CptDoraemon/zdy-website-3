@@ -57,7 +57,12 @@ export class AuthController {
     }
 
     const createdUser = await this.authService.registerAdmin(form.username, form.password, form.token);
-    await this.passportLogin(createdUser, request);
+
+    // auto login only if the user was not logged in
+    if (!request.isAuthenticated()) {
+      await this.passportLogin(createdUser, request);
+    }
+
     return {
       username: createdUser.username
     }
