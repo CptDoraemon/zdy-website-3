@@ -1,4 +1,4 @@
-import React, {useContext, useMemo} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import {Link, useLocation} from "react-router-dom";
 import AppBar from '@material-ui/core/AppBar';
@@ -9,6 +9,9 @@ import Tab from "@material-ui/core/Tab";
 import AccountContext from "../../context/account-context";
 import {observer} from "mobx-react";
 import HeaderButtonGroup from "./header-button-group";
+import HeaderSideBar from "./header-side-bar";
+import {Drawer} from "@material-ui/core";
+import {usePrevious} from "react-use";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -66,6 +69,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end'
+  },
+  drawer: {
+    backgroundColor: theme.palette.primary.main
+  },
+  username: {
+    fontWeight: 700,
+    padding: theme.spacing(0, 1)
   }
 }));
 
@@ -84,6 +94,13 @@ const Header = observer<React.FC<HeaderProps>>(({data, homeLink}) => {
     return data.map(obj => obj.link)
   }, [data]);
   const accountContext = useContext(AccountContext);
+  const [isSideBarActive, setIsSideBarActive] = useState(false);
+
+  const location = useLocation().key;
+  useEffect(() => {
+    // close sidebar after redirect
+    setIsSideBarActive(false)
+  }, [location]);
 
   const tabs = useMemo(() => {
     if (!accountContext.isLogin) return null;
@@ -112,6 +129,8 @@ const Header = observer<React.FC<HeaderProps>>(({data, homeLink}) => {
     </Tabs>
   }, [accountContext.isLogin, classes.activeTab, classes.tabRoot, data, links, path]);
 
+  const closeSideBar = () => setIsSideBarActive(false);
+
   return (
     <AppBar position="static" elevation={0}>
       <Toolbar variant={'dense'} className={classes.toolbar}>
@@ -124,12 +143,21 @@ const Header = observer<React.FC<HeaderProps>>(({data, homeLink}) => {
           {tabs}
         </div>
         <div className={classes.buttonGroup}>
-          <HeaderButtonGroup/>
+          <div className={classes.username}>
+            {accountContext.username}
+          </div>
+          {
+            accountContext.isLogin &&
+            <HeaderButtonGroup setIsSideBarActive={setIsSideBarActive}/>
+          }
         </div>
       </Toolbar>
       <div className={classes.mobileTabs}>
         {tabs}
       </div>
+      <Drawer anchor={'right'} open={isSideBarActive} onClose={closeSideBar} classes={{paper: classes.drawer}}>
+        <HeaderSideBar close={closeSideBar}/>
+      </Drawer>
     </AppBar>
   )
 });
