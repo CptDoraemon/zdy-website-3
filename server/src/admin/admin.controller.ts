@@ -6,7 +6,8 @@ import {
   Get,
   Post,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
+  Request
 } from '@nestjs/common';
 import {CreateUserDto} from "./dto/create-user.dto";
 import {DeleteUserDto} from "./dto/delete-user.dto";
@@ -39,8 +40,18 @@ export class AdminController {
   }
 
   @Delete('/delete-user')
-  async deleteUser(@Body() body: DeleteUserDto) {
-    await this.userService.deleteUsers(body.username);
+  async deleteUser(
+    @Body() body: DeleteUserDto,
+    @Request() req
+  ) {
+    const username = body.username;
+    await this.userService.deleteUsers(username);
+
+    // logout if this user is deleting itself
+    if (username === req.user.username) {
+      req.logOut()
+    }
+
     return {
       status: 'ok'
     }

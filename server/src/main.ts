@@ -17,10 +17,11 @@ const options: ConnectionConfig = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
 };
-export const CONNECTION = mysql.createPool(options);
+export const CONNECTION = mysql.createConnection(options);
 const SESSION_STORE = new MySQLStore({
   schema: {
     tableName: process.env.SESSION_TABLE,
+    resave: false,
     columnNames: {
       session_id: 'session_id',
       expires: 'expires',

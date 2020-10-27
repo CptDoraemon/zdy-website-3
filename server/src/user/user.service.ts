@@ -68,7 +68,7 @@ export class UserService {
     // clear user's session
     const sessionTable = this.configService.get('SESSION_TABLE');
     const userId = user.id;
-    await query(`DELETE FROM ${sessionTable} WHERE data REGEXP \'"passport":\\\\{"user":\\\\{"id":${userId},\';`);
+    await query(`DELETE FROM ${sessionTable} WHERE data REGEXP '"id":${userId},' OR data REGEXP '"id":${userId}\\\\}';`);
 
     return true
   }

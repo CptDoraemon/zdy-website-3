@@ -18,8 +18,10 @@ export class AuthController {
   private passportLogin(user: any, request: ExpressRequest) {
     return new Promise((resolve, reject) => {
       request.login(user, (err) => {
-        console.log(err);
-        if (err) return reject(err);
+        if (err) {
+          console.log(err);
+          return reject(err);
+        }
         resolve(true)
       });
     })
