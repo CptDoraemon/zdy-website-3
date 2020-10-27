@@ -10,7 +10,8 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
   },
   logo: {
-    height: 50
+    width: '100%',
+    maxWidth: 300,
   }
 }));
 

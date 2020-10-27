@@ -1,6 +1,7 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import PieChart from "../../components/charts/pie-chart";
+import Logo from "../../components/logo/logo";
 
 const mockPieChartData = [{
   name: 'Chrome',
@@ -50,6 +51,7 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
+      <Logo/>
       <div>
         Data Summary
       </div>
