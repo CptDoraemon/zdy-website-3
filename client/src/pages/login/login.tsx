@@ -7,6 +7,7 @@ import urls from "../../services/urls";
 import InputService from "../../services/form/input.service";
 import simpleValidator from "../../services/form/simple-validator";
 import useRedirectWhenValueNotNull from "../../utils/use-redirect-on-change";
+import Logo from "../../components/logo/logo";
 
 interface IBody {
   username: string,
@@ -33,7 +34,10 @@ const Login = observer(() => {
   useRedirectWhenValueNotNull(() => service.request.data);
 
   return (
-    <Form title={service.title} buttonText={service.buttonText} onSubmit={service.submit} fields={service.fields} request={service.request}/>
+    <>
+      <Logo/>
+      <Form title={service.title} buttonText={service.buttonText} onSubmit={service.submit} fields={service.fields} request={service.request}/>
+    </>
   )
 });
 
