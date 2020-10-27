@@ -18,12 +18,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 45
   },
   title: {
     margin: theme.spacing(0, 2, 0, 0),
     fontWeight: 700,
     fontSize: '1.25rem'
+  },
+  logo: {
+    height: '100%'
   },
   activeTab: {
     '&:visited': {
@@ -134,6 +138,7 @@ const Header = observer<React.FC<HeaderProps>>(({data, homeLink}) => {
   return (
     <AppBar position="static" elevation={0}>
       <Toolbar variant={'dense'} className={classes.toolbar}>
+        {/*<img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' className={classes.logo}/>*/}
         <Typography component={'h1'} className={classes.title} >
           <Link to={homeLink} className={classes.homeLink}>
             DATABASE
