@@ -12,7 +12,6 @@ import {tableActionsGenerators} from "./redux/actions/table/table";
 import {Loading} from "./loader-wrapper/loader-utils-pages";
 
 interface FilterTableProps {
-  store: any,
   title: string,
   filters: Array<FilterInitializers>,
   sorts: OptionObject[],
@@ -25,7 +24,6 @@ interface FilterTableProps {
 
 const InternalFilterTable: React.FC<FilterTableProps> = (
   {
-    store,
     title,
     filters,
     sorts,
@@ -40,17 +38,13 @@ const InternalFilterTable: React.FC<FilterTableProps> = (
   }, []);
 
   return (
-    <Provider store={store}>
-      {
-        isStateInitialized ?
-          <>
-            {/*@ts-ignore*/}
-            <FiltersGroupContainer />
-            <SearchTableContainer title={title}/>
-          </> :
-          <Loading/>
-      }
-    </Provider>
+    isStateInitialized ?
+      <>
+        {/*@ts-ignore*/}
+        <FiltersGroupContainer />
+        <SearchTableContainer title={title}/>
+      </> :
+      <Loading/>
   )
 };
 

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { Provider } from 'react-redux';
-import configureStore from "./redux/configure-store";
 import configureTableStore from "./app/filter-table/redux/configure-store"
 import {
   BrowserRouter as Router,
@@ -16,9 +15,7 @@ import RouterScrollRestoration from "./router-scroll-restoration";
 import Header from "./components/header/header";
 import {navTabsDataForHeader} from "./router-urls";
 import MainWrapper from "./components/main-wrapper/main-wrapper";
-import Home from "./pages/home/home";
 import Search from "./pages/search/search";
-import Submission from "./pages/submission/submission";
 import Footer from "./components/footer/footer";
 import AdminRegister from "./admin-pages/admin-register";
 import AccountService from "./context/account.service";
@@ -32,7 +29,6 @@ import Logout from "./pages/logout/logout";
 import Login from "./pages/login/login";
 import GenerateReport from "./pages/generate-report/generate-report";
 
-const store = configureStore();
 const tableStore = configureTableStore();
 
 const useStyles = makeStyles(theme => ({
@@ -61,7 +57,7 @@ const InnerApp = observer(() => {
           <MainWrapper>
             <Switch>
               <Route path={routerUrls.landingPage} exact render={ () => <LandingPage/> } />
-              <LoginRequired path={routerUrls.search} exact render={ () => <Search store={tableStore}/> } />
+              <LoginRequired path={routerUrls.search} exact render={ () => <Search/> } />
               <LoginRequired path={routerUrls.contact} exact render={ () => <div>contact</div> } />
               <LoginRequired path={routerUrls.logout} exact render={ () => <Logout /> } />
               <LoginRequired path={routerUrls.generateReport} exact render={ () => <GenerateReport /> } />
@@ -80,7 +76,7 @@ const InnerApp = observer(() => {
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <Provider store={tableStore}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <InnerApp />

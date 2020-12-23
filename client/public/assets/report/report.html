@@ -12,7 +12,7 @@
     <h2>受检者基本信息</h2>
     <hr/>
     <div class="info-section">
-      <span class="info-item bold">姓名: </span>
+      <span class="info-item bold">姓名： </span>
       <span class="info-item bold">性别：</span>
       <span class="info-item bold">年龄：</span>
       <span class="info-item bold">病理编号：</span>
@@ -26,6 +26,11 @@
       <span class="info-item-double bold">检测项目：</span>
     </div>
     <hr/>
+
+    <h2>检测结果总览</h2>
+    <div class="table">
+      <table id="table"> </table>
+    </div>
   </div>
 
   <script>
@@ -35,7 +40,7 @@
 
     function setDateStrings() {
       const date = new Date();
-      const dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       const els = document.getElementsByClassName('date');
       for (let i=0; i<els.length; i++) {
         els[i].innerHTML = els[i].innerHTML + dateString

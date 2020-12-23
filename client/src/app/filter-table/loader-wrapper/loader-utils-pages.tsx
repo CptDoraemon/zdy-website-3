@@ -27,7 +27,7 @@ const Error: React.FC<{
 }> = ({message}) => {
   return (
     <Wrapper>
-      {message || 'Failed to load table data'}
+      {message || '服务器错误，请稍后重试'}
     </Wrapper>
   )
 };
@@ -35,7 +35,7 @@ const Error: React.FC<{
 const NoResultFound = () => {
   return (
     <Wrapper>
-      No result found with the applied filters
+      未找到符合条件的结果
     </Wrapper>
   )
 };

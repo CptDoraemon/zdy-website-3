@@ -1,8 +1,10 @@
-import React, {useMemo, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from "@material-ui/core";
 import dialogImage1 from './dialog-image-1.png';
 import dialogImage2 from './dialog-image-2.png';
+import {useSelector} from "react-redux";
+import {FilterTableDefaultState} from "../../app/filter-table/redux/states/root-states";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   iframe: {
     width: '100%',
     height: '29.7cm',
-    border: 'solid 1px #ccc',
+    border: 'none',
   },
   dialogLink: {
     textDecoration: 'underline dotted',
@@ -41,6 +43,57 @@ const GenerateReport = () => {
   const classes = useStyles();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+  const tableData = useSelector<FilterTableDefaultState>(state => state.table.data);
+
+  useEffect(() => {
+    console.log(iframeRef!.current!.contentDocument);
+    // generate table
+    if (!tableData || !isIframeLoaded) {
+      return
+    }
+    const iframe = iframeRef.current;
+    if (!iframe || !iframe.contentDocument) {
+      return
+    }
+
+    const iframeDocument = iframe.contentDocument;
+    const header = ['Gene Symbol', '药品名', '药品类型', '病症', 'FDA Source'];
+    const keys = ['Gene_symbol', 'Drug_name', 'Drug_type', 'disease', 'FDA Source'];
+    const table = iframeDocument.getElementById('table');
+    console.log(table);
+    if (!table) {
+      return
+    }
+
+    insertTableHeader();
+    // @ts-ignore
+    tableData.forEach(row => {
+      insertTableRow(row)
+    });
+
+    function insertTableHeader() {
+      const row = iframeDocument.createElement('tr');
+      header.forEach(name => {
+        const cell = iframeDocument.createElement('th');
+        cell.innerText = name;
+        row.appendChild(cell);
+      });
+      table!.appendChild(row);
+    }
+
+    function insertTableRow(data: string[]) {
+      const row = iframeDocument.createElement('tr');
+      keys.forEach(key => {
+        const cell = iframeDocument.createElement('td');
+        // @ts-ignore
+        cell.innerText = data[key];
+        row.appendChild(cell);
+      });
+      table!.appendChild(row);
+    }
+
+  }, [tableData, isIframeLoaded]);
 
   const handleDialogClose = () => {
     setDialogOpen(false)
@@ -69,7 +122,13 @@ const GenerateReport = () => {
         </div>
       </div>
 
-      <iframe title='report' ref={iframeRef} src={process.env.PUBLIC_URL + '/assets/report/report.html'} className={classes.iframe}/>
+      <iframe
+        title='report'
+        ref={iframeRef}
+        src={process.env.PUBLIC_URL + '/assets/report/report.html'}
+        className={classes.iframe}
+        onLoad={() => setIsIframeLoaded(true)}
+      />
 
       <Dialog
         open={dialogOpen}

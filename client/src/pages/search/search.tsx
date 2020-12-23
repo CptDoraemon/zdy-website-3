@@ -10,15 +10,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface SearchProps {
-  store: any
+
 }
 
-const Search: React.FC<SearchProps> = ({store}) => {
+const Search: React.FC<SearchProps> = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <FilterTable store={store} filters={[]} sorts={sortOptions} title={'药物筛选'}/>
+      <FilterTable filters={[]} sorts={sortOptions} title={'药物筛选'}/>
     </div>
   )
 };
