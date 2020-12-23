@@ -11,7 +11,6 @@ import {observer} from "mobx-react";
 import HeaderButtonGroup from "./header-button-group";
 import HeaderSideBar from "./header-side-bar";
 import {Drawer} from "@material-ui/core";
-import {usePrevious} from "react-use";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -75,7 +74,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end'
   },
   drawer: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
+    maxWidth: '100%'
   },
   username: {
     fontWeight: 700,

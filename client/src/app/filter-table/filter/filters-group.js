@@ -108,10 +108,10 @@ const FiltersGroup = ({
               {/* buttons group */}
               <div className={classes.buttonsGroup}>
                 <Button size={'small'} variant="contained" type={'submit'} className={classes.applyButton} disableElevation onClick={submit} disabled={!canApplyNewFilter}>
-                  {'Apply new filters'}
+                  查询
                 </Button>
                 <Button size={'small'} variant="contained" className={classes.resetButton} disableElevation onClick={resetFilter} disabled={disabled}>
-                  Reset all filters
+                  重置
                 </Button>
               </div>
             </form>

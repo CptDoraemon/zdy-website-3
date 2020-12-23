@@ -136,31 +136,16 @@ const InnerSearchTable = React.forwardRef<HTMLDivElement, InnerSearchTableProps>
                   return (
                     <TableRow
                       hover
-                      // onClick={()=>handleClick(id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={i}
-                      // selected={isItemSelected}
                     >
-                      {/*<TableCell padding="checkbox">*/}
-                      {/*  <Checkbox*/}
-                      {/*    checked={isItemSelected}*/}
-                      {/*  />*/}
-                      {/*</TableCell>*/}
-
                       {
                         header.map((key, i) => (
                           <TableCell align="left" key={i}>{row[key]}</TableCell>
                         ))
                       }
-
-                      {/*<TableCell*/}
-                      {/*  align={'right'}*/}
-                      {/*  padding={'default'}*/}
-                      {/*>*/}
-                      {/*  <Link to={routerUrls.searchRowDetail.getRoute(id)} className={classes.moreInfo}>More Info</Link>*/}
-                      {/*</TableCell>*/}
                     </TableRow>
                   )
                 })

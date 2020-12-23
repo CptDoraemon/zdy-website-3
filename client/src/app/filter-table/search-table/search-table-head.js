@@ -19,15 +19,6 @@ const SearchTableHead = ({header, onSelectAllClick, numSelected, rowCount}) => {
   return (
     <TableHead>
       <TableRow>
-        {/*<TableCell padding="checkbox" classes={{stickyHeader: classes.stickyHeaderTC}}>*/}
-        {/*  <Checkbox*/}
-        {/*    indeterminate={numSelected > 0 && numSelected < rowCount}*/}
-        {/*    checked={rowCount > 0 && numSelected === rowCount}*/}
-        {/*    onChange={onSelectAllClick}*/}
-        {/*    inputProps={{ 'aria-label': 'select all entries' }}*/}
-        {/*  />*/}
-        {/*</TableCell>*/}
-
         {header.map((headCell, i) => (
           <TableCell
             classes={{stickyHeader: classes.stickyHeaderTC}}
@@ -38,14 +29,6 @@ const SearchTableHead = ({header, onSelectAllClick, numSelected, rowCount}) => {
             {headCell}
           </TableCell>
         ))}
-
-        {/*<TableCell*/}
-        {/*  align={'right'}*/}
-        {/*  padding={'default'}*/}
-        {/*  classes={{stickyHeader: classes.stickyHeaderTC}}*/}
-        {/*>*/}
-        {/*  More Info*/}
-        {/*</TableCell>*/}
       </TableRow>
     </TableHead>
   );

@@ -88,7 +88,7 @@ const SearchTableControls = (
           label: classes.controlLabel
         }}
         control={<Switch checked={dense} onChange={toggleDense} />}
-        label="Dense padding"
+        label="紧凑"
       />
     </div>
   )

@@ -5,7 +5,8 @@ import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import {primaryButtonStyles} from "../../../styles";
-import urls from "../../../services/urls";
+import routerUrls from "../../../router-urls";
+import {Link} from "react-router-dom";
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -70,13 +71,13 @@ const SearchTableToolbar = ({selected, title, totalRows}) => {
               { title }
             </Typography>
             <Typography className={classes.text} variant="body2" component="span" color={'secondary'}>
-              { ` (${totalRows} records found)` }
+              { ` (找到了${totalRows}条结果)` }
             </Typography>
           </div>
         )}
       </div>
-      <Button component={'a'} className={classes.downloadButton} size={'small'} variant="contained" disableElevation href={urls.tableDataCsv}>
-        Download csv
+      <Button component={Link} className={classes.downloadButton} size={'small'} variant="contained" disableElevation to={routerUrls.generateReport}>
+        生成报告
       </Button>
     </Toolbar>
   );

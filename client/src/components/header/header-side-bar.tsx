@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo} from "react";
+import React, {useContext, useMemo} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import AccountContext from "../../context/account-context";
 import {Button, IconButton} from "@material-ui/core";
@@ -7,12 +7,12 @@ import {Link} from "react-router-dom";
 import routerUrls from "../../router-urls";
 import clsx from 'clsx'
 import CloseIcon from '@material-ui/icons/Close';
-import {useLocation} from "react-router-dom";
-import {usePrevious} from "react-use";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2, 5),
+    width: 500,
+    maxWidth: '100%'
   },
   closeIconRow: {
     position: 'relative',
@@ -71,11 +71,11 @@ const HeaderSideBar = observer<React.FC<HeaderButtonGroupProps>>(({close}) => {
     if (isLogin) {
       if (isAdmin) {
         return <>
-          <Button className={clsx(classes.primaryButton, classes.buttonCommon)} component={Link} to={routerUrls.adminHome} size={'small'}>Admin Console</Button>
-          <Button className={clsx(classes.secondaryButton, classes.buttonCommon)} component={Link} to={routerUrls.logout} size={'small'}>Logout</Button>
+          <Button className={clsx(classes.primaryButton, classes.buttonCommon)} component={Link} to={routerUrls.adminHome} size={'small'}>控制台</Button>
+          <Button className={clsx(classes.secondaryButton, classes.buttonCommon)} component={Link} to={routerUrls.logout} size={'small'}>登出</Button>
         </>
       } else {
-        return <Button className={clsx(classes.secondaryButton, classes.buttonCommon)} component={Link} to={routerUrls.logout} size={'small'}>Logout</Button>
+        return <Button className={clsx(classes.secondaryButton, classes.buttonCommon)} component={Link} to={routerUrls.logout} size={'small'}>登出</Button>
       }
     } else {
       return <></>

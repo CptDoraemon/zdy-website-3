@@ -54,7 +54,7 @@ const FilterToggleButton: React.FC<FilterToggleButtonProps> = (
       aria-expanded={dropdown}
       onClick={toggleDropdown}
     >
-      filters
+      筛选
     </Button>
   )
 };

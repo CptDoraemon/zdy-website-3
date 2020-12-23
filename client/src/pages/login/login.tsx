@@ -21,12 +21,12 @@ interface IResponse {
 const Login = observer(() => {
   const [service] = useState(() => {
     return new FormService(
-      'Login',
-      'login',
+      '登录',
+      '登录',
       new PostService<IBody, IResponse>(urls.login),
       [
-        new InputService(simpleValidator, 'username', 'username'),
-        new InputService(simpleValidator, 'password', 'password','password')
+        new InputService(simpleValidator, '用户名', 'username'),
+        new InputService(simpleValidator, '密码', 'password','password')
       ]
     )
   });

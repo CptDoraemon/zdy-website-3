@@ -31,7 +31,7 @@ const FilterMultipleTextarea: React.FC<FilterMultipleTextareaProps> = ({filter, 
       label="Gene symbols"
       multiline
       rows={4}
-      placeholder="Type gene symbols, separated by comma"
+      placeholder="请输入gene symbol，以英文逗号分隔"
       variant="outlined"
       fullWidth
       value={value}

@@ -18,7 +18,6 @@ import {navTabsDataForHeader} from "./router-urls";
 import MainWrapper from "./components/main-wrapper/main-wrapper";
 import Home from "./pages/home/home";
 import Search from "./pages/search/search";
-import SearchRowDetail from "./pages/search/search-row-detail";
 import Submission from "./pages/submission/submission";
 import Footer from "./components/footer/footer";
 import AdminRegister from "./admin-pages/admin-register";
@@ -31,6 +30,7 @@ import AdminRequired from "./protected-routes/admin-required";
 import AdminHome from "./admin-pages/admin-home";
 import Logout from "./pages/logout/logout";
 import Login from "./pages/login/login";
+import GenerateReport from "./pages/generate-report/generate-report";
 
 const store = configureStore();
 const tableStore = configureTableStore();
@@ -61,12 +61,10 @@ const InnerApp = observer(() => {
           <MainWrapper>
             <Switch>
               <Route path={routerUrls.landingPage} exact render={ () => <LandingPage/> } />
-              <LoginRequired path={routerUrls.home} exact render={ () => <Home/> } />
               <LoginRequired path={routerUrls.search} exact render={ () => <Search store={tableStore}/> } />
-              <LoginRequired path={routerUrls.searchRowDetail.route} exact render={ (props) => <SearchRowDetail id={props.match.params.id} goBack={props.history.goBack}/> } />
-              <LoginRequired path={routerUrls.submission} exact render={ () => <Submission /> } />
               <LoginRequired path={routerUrls.contact} exact render={ () => <div>contact</div> } />
               <LoginRequired path={routerUrls.logout} exact render={ () => <Logout /> } />
+              <LoginRequired path={routerUrls.generateReport} exact render={ () => <GenerateReport /> } />
               <Route path={routerUrls.login} exact render={ () => <Login/> } />
               <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />
               <AdminRequired path={routerUrls.adminHome} exact render={ () => <AdminHome/> } />

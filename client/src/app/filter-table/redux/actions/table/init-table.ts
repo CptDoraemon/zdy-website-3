@@ -45,7 +45,7 @@ const initTable = (
             displayName: str,
             internalName: str,
           })),
-          title: {internalName: 'sortBy', displayName: 'sort by'},
+          title: {internalName: 'sortBy', displayName: '排序'},
           selected: columns[0]
         };
 

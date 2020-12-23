@@ -1,29 +1,23 @@
 const routes = {
   landingPage: '/',
-  home: '/home',
   search: '/search',
-  browse: '/browse',
-  download: '/download',
-  submission: '/submission',
   contact: '/contact',
   help: '/help',
   login: '/login',
   logout: '/logout',
+  generateReport: '/generate-report',
   adminRegister: '/admin/register',
   adminLogin: '/admin/login',
   adminHome: '/admin/home',
   fallback: '/*'
 };
 
-// type TabLinks = {
-//   title: string,
-//   link: string
-// }[];
-const _navTabsDataForHeader = ['home', 'search', 'submission', 'contact'];
+const navBarDisplayNames = ['药物筛选', '成员介绍'];
+const navBarKeys = ['search', 'contact'];
 export const navTabsDataForHeader = (() => {
-  return _navTabsDataForHeader.map(key => ({
-    title: key,
-    link: routes[key]
+  return navBarDisplayNames.map((displayName, i) => ({
+    title: displayName,
+    link: routes[navBarKeys[i]]
   }))
 })();
 
