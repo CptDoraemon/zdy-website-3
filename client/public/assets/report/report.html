@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Report</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <div contentEditable="true" class="print">
+    <img class="logo" src="logo.png" alt="logo"/>
+    <h1 class="center">分子诊断中心测序报告单</h1>
+    <h2>受检者基本信息</h2>
+    <hr/>
+    <div class="info-section">
+      <span class="info-item bold">姓名: </span>
+      <span class="info-item bold">性别：</span>
+      <span class="info-item bold">年龄：</span>
+      <span class="info-item bold">病理编号：</span>
+      <span class="info-item bold">ID号：</span>
+      <span class="info-item bold">电话：</span>
+      <span class="info-item bold">诊断：</span>
+      <span class="info-item bold">申请科室：</span>
+      <span class="info-item bold date">申请日期：</span>
+      <span class="info-item-double bold">标本：</span>
+      <span class="info-item bold date">报告日期：</span>
+      <span class="info-item-double bold">检测项目：</span>
+    </div>
+    <hr/>
+  </div>
+
+  <script>
+    window.onload = () => {
+      setDateStrings()
+    };
+
+    function setDateStrings() {
+      const date = new Date();
+      const dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      const els = document.getElementsByClassName('date');
+      for (let i=0; i<els.length; i++) {
+        els[i].innerHTML = els[i].innerHTML + dateString
+      }
+    }
+  </script>
+</body>
+</html>

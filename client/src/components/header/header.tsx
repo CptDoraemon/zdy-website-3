@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   tabRoot: {
     opacity: 1,
     textTransform: 'uppercase',
-    fontWeight: 700,
+    fontWeight: 800,
     fontSize: '0.8rem'
   },
   homeLink: {

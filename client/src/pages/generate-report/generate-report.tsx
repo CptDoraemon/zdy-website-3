@@ -1,8 +1,8 @@
-import React, {useMemo} from "react";
+import React, {useMemo, useRef, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {Button} from "@material-ui/core";
-import Logo from "../../components/logo/logo";
-import './style.css';
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from "@material-ui/core";
+import dialogImage1 from './dialog-image-1.png';
+import dialogImage2 from './dialog-image-2.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,55 +15,44 @@ const useStyles = makeStyles(theme => ({
   pageHeader: {
     margin: theme.spacing(1, 0)
   },
-  printWrapper: {
-    width: '21cm',
-    height: '29.7cm',
-    padding: '2.54cm',
-    border: 'solid 1px #ccc',
-    fontFamily: "SimSun,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
-    fontSize: '12pt',
-    '& h1': {
-      color: '#46978E',
-      textAlign: 'center',
-      fontSize: '22pt',
-    },
-    '& h2': {
-      color: '#46978E',
-      fontSize: '18pt',
-    },
-    '& span': {
-      fontWeight: 'bold'
-    },
-  },
-  section: {
+  iframe: {
     width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    flexWrap: 'wrap'
+    height: '29.7cm',
+    border: 'solid 1px #ccc',
   },
-  sectionItem: {
-    minWidth: '33%',
-    lineHeight: 2
+  dialogLink: {
+    textDecoration: 'underline dotted',
+    cursor: 'help',
+    '&:hover': {
+      textDecoration: 'underline dotted',
+    }
   },
-  sectionItemDouble: {
-    minWidth: '66%',
-    lineHeight: 2
+  dialog: {
+    '& img': {
+      maxWidth: '100%'
+    }
+  },
+  dialogContent: {
+    width: '100%'
   }
 }));
 
 const GenerateReport = () => {
   const classes = useStyles();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
-  const handlePrint = () => {
-    window.print()
+  const handleDialogClose = () => {
+    setDialogOpen(false)
   };
 
-  const todayString = useMemo(() => {
-    const date = new Date();
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-  }, []);
+  const handlePrint = () => {
+    const iframe = iframeRef.current;
+    if (iframe && iframe.contentWindow) {
+      iframe.focus();
+      iframe.contentWindow.print()
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -72,36 +61,35 @@ const GenerateReport = () => {
           打印
         </Button>
         <div>
-          本页内容可编辑
+          本页内容可编辑，如需隐藏页眉与页脚，请在
+          <Link
+            onClick={() => setDialogOpen(true)}
+            className={classes.dialogLink}
+          >打印窗口设置</Link>。
         </div>
       </div>
 
-      <div className={classes.printWrapper} contentEditable="true">
-        <Logo width='50%'/>
-        <h1>
-          分子诊断中心测序报告单
-        </h1>
-        <h2>
-          受检者基本信息
-        </h2>
-        <hr/>
-        <div className={classes.section}>
-          <span className={classes.sectionItem}>姓名：</span>
-          <span className={classes.sectionItem}>性别：</span>
-          <span className={classes.sectionItem}>年龄：</span>
-          <span className={classes.sectionItem}>病理编号：</span>
-          <span className={classes.sectionItem}>ID号：</span>
-          <span className={classes.sectionItem}>电话：</span>
-          <span className={classes.sectionItem}>诊断：</span>
-          <span className={classes.sectionItem}>申请科室：</span>
-          <span className={classes.sectionItem}>申请日期：{todayString}</span>
-          <span className={classes.sectionItemDouble}>标本：</span>
-          <span className={classes.sectionItem}>报告日期：{todayString}</span>
-          <span className={classes.sectionItem}>检测项目：</span>
-        </div>
-        <hr/>
-      </div>
+      <iframe title='report' ref={iframeRef} src={process.env.PUBLIC_URL + '/assets/report/report.html'} className={classes.iframe}/>
 
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        className={classes.dialog}
+      >
+        <DialogTitle>如何隐藏页眉与页脚</DialogTitle>
+        <DialogContent className={classes.dialogContent}>
+          <DialogContentText>
+            以火狐浏览器为例：
+            <img src={dialogImage1} alt={'tutorial-image-1'}/>
+            <img src={dialogImage2} alt={'tutorial-image-2'}/>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            关闭窗口
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   )
 };

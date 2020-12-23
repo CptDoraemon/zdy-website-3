@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'SimSun';
+    src: url(./SimSun.ttf) format("truetype");
+}
+
+body {
+    font-family: SimSun,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    font-size: 12pt;
+    background-color: rgb(96, 96, 96);
+    width: 100%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 14px auto;
+}
+
+@media print {
+    body {
+        background-color: #fff;
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+.print {
+    background-color: #fff;
+    width: 21cm;
+    /*height: '29.7cm',*/
+    padding: 2.54cm;
+}
+
+.print h1 {
+    color: #46978E;
+    font-size: 22pt
+}
+
+.print h2 {
+    color: #46978E;
+    font-size: 18pt
+}
+
+.bold {
+    font-weight: bold
+}
+
+.center {
+    text-align: center;
+}
+
+.logo {
+    max-width: 50%
+}
+
+.info-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    min-width: 33%;
+    margin: 6pt 0;
+}
+
+.info-item-double {
+    min-width: 66%;
+    margin: 6pt 0;
+}
