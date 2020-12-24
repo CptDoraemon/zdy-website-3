@@ -1,12 +1,9 @@
 import {lighten, makeStyles} from "@material-ui/core/styles";
-import React, {useMemo} from "react";
+import React from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import {primaryButtonStyles} from "../../../styles";
-import routerUrls from "../../../router-urls";
-import {Link} from "react-router-dom";
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -76,9 +73,6 @@ const SearchTableToolbar = ({selected, title, totalRows}) => {
           </div>
         )}
       </div>
-      <Button component={Link} className={classes.downloadButton} size={'small'} variant="contained" disableElevation to={routerUrls.generateReport}>
-        生成报告
-      </Button>
     </Toolbar>
   );
 };

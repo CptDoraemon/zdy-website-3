@@ -2,19 +2,22 @@ import { cloneDeep } from 'lodash';
 import defaultFilterState, {DefaultFilterState} from "./filter";
 import defaultSortState, {DefaultSortState} from "./sort";
 import defaultTableState, {DefaultTableState} from "./table";
+import defaultBasicInfoState, {DefaultBasicInfoState} from "./basic-info";
 
 export interface FilterTableDefaultState {
   filter: DefaultFilterState,
   sort: DefaultSortState,
   table: DefaultTableState,
-  isStateInitialized: boolean
+  isStateInitialized: boolean,
+  basicInfo: DefaultBasicInfoState
 }
 
 const filterTableDefaultState: FilterTableDefaultState = {
   filter: cloneDeep(defaultFilterState),
   sort: cloneDeep(defaultSortState),
   table: cloneDeep(defaultTableState),
-  isStateInitialized: false
+  isStateInitialized: false,
+  basicInfo: cloneDeep(defaultBasicInfoState)
 };
 
 export default filterTableDefaultState

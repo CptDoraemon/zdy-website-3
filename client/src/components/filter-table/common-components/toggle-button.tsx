@@ -7,10 +7,10 @@ import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   filterButton: {
-    margin: theme.spacing(1, 0),
+    margin: theme.spacing(0.5, 0),
     textTransform: 'uppercase',
     fontWeight: 700,
-    fontSize: theme.typography.caption.fontSize
+    fontSize: theme.typography.caption.fontSize,
   },
   filterButtonActive: {
     ...successButtonStyles(theme).root
@@ -30,14 +30,16 @@ const useStyles = makeStyles(theme => ({
 interface FilterToggleButtonProps {
   dropdown: boolean,
   toggleDropdown: () => void,
-  isActiveFilterDifferentThanDefault: boolean
+  isActive: boolean,
+  text: string
 }
 
-const FilterToggleButton: React.FC<FilterToggleButtonProps> = (
+const ToggleButton: React.FC<FilterToggleButtonProps> = (
   {
     dropdown,
     toggleDropdown,
-    isActiveFilterDifferentThanDefault
+    isActive,
+    text
   }) => {
   const classes = useStyles();
 
@@ -48,15 +50,15 @@ const FilterToggleButton: React.FC<FilterToggleButtonProps> = (
       disableElevation
       className={clsx(
         classes.filterButton,
-        isActiveFilterDifferentThanDefault ? classes.filterButtonActive : classes.filterButtonInactive
+        isActive ? classes.filterButtonActive : classes.filterButtonInactive
       )}
       endIcon={<ChevronRightIcon className={dropdown ? classes.arrowDown : classes.arrowRight}/>}
       aria-expanded={dropdown}
       onClick={toggleDropdown}
     >
-      筛选
+      {text}
     </Button>
   )
 };
 
-export default FilterToggleButton
+export default ToggleButton

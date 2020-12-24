@@ -10,6 +10,7 @@ import {
 import {OptionObject} from "../../redux/states/sort";
 import {tableActionsGenerators} from "../../redux/actions/table/table";
 import {Loading} from "./loader-wrapper/loader-utils-pages";
+import BasicInfo from "./basic-info/basic-info";
 
 interface FilterTableProps {
   title: string,
@@ -42,6 +43,7 @@ const InternalFilterTable: React.FC<FilterTableProps> = (
       <>
         {/*@ts-ignore*/}
         <FiltersGroupContainer />
+        <BasicInfo/>
         <SearchTableContainer title={title}/>
       </> :
       <Loading/>
