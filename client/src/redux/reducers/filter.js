@@ -1,6 +1,6 @@
 import filterTableDefaultState from "../states/root-states";
 import {filterActions} from "../actions/filter/filter";
-import {cloneDeep} from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 
 function filter(state = filterTableDefaultState.filter, actions) {
   switch (actions.type) {

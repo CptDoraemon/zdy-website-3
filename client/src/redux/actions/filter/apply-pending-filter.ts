@@ -1,5 +1,5 @@
 import {filterActions} from "./filter";
-import {cloneDeep} from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 import checkIfFilterValidationErrorExists from "./utils/check-if-filter-validation-error-exists";
 import {tableActionsGenerators} from "../table/table";
 import {FilterTableDefaultState} from "../../states/root-states";

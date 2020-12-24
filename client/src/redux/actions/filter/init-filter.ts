@@ -1,5 +1,5 @@
 import {filterActions} from "./filter";
-import {cloneDeep} from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import {Choice, FilterState, FilterTypes} from "../../states/filter";
 
 const getBaseFilterObj = (displayName: string, internalName: string, type: FilterTypes, choices: Choice[], original: Choice[]): FilterState => {

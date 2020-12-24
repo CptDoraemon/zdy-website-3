@@ -1,4 +1,4 @@
-import {cloneDeep} from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import {Choice, FilterState, FilterTypes} from "../../states/filter";
 import {filterActions} from "./filter";
 import checkIfFilterValidationErrorExists from "./utils/check-if-filter-validation-error-exists";

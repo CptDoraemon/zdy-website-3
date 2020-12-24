@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import HighchartsWrapper from "./highcharts-wrapper";
-import {cloneDeep} from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 
 export interface HeatMapData {
   infos: {

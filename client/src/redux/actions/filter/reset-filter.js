@@ -1,5 +1,5 @@
 import {filterActions} from "./filter";
-import {cloneDeep} from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 import {tableActionsGenerators} from "../table/table";
 
 const resetFilter = () => {
