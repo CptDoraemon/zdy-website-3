@@ -1,8 +1,8 @@
-import {sortActionsGenerators} from "../redux/actions/sort/sort";
-import {tableActionsGenerators} from "../redux/actions/table/table";
+import {sortActionsGenerators} from "../../../redux/actions/sort/sort";
+import {tableActionsGenerators} from "../../../redux/actions/table/table";
 import {connect} from "react-redux";
 import SearchTable from "./search-table";
-import {FilterTableDefaultState} from "../redux/states/root-states";
+import {FilterTableDefaultState} from "../../../redux/states/root-states";
 
 function mapDispatchToProps(dispatch: any) {
   return {

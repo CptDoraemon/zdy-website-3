@@ -1,4 +1,4 @@
-import {OptionObject} from "../../app/filter-table/redux/states/sort";
+import {OptionObject} from "../../redux/states/sort";
 
 const sortOptions: OptionObject[] = [
   {

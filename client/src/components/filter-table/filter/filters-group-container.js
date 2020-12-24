@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import FiltersGroup from "./filters-group";
-import {filterActionsGenerators} from "../redux/actions/filter/filter";
+import {filterActionsGenerators} from "../../../redux/actions/filter/filter";
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -3,7 +3,7 @@ import filterStyles from "./filter-styles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import TextField from "@material-ui/core/TextField";
 import FilterCommon from "./filter-common";
-import {FilterState} from "../redux/states/filter";
+import {FilterState} from "../../../redux/states/filter";
 
 const useStyles = makeStyles(theme => ({
   textFieldGroup: {

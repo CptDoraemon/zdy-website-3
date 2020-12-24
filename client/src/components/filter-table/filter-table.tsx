@@ -1,14 +1,14 @@
 import * as React from "react";
-import {connect, Provider} from "react-redux";
+import {connect} from "react-redux";
 import FiltersGroupContainer from "./filter/filters-group-container";
 import SearchTableContainer from "./search-table/search-table-container";
-import {FilterTableDefaultState} from "./redux/states/root-states";
+import {FilterTableDefaultState} from "../../redux/states/root-states";
 import {useEffect} from "react";
 import {
   FilterInitializers,
-} from "./redux/actions/filter/init-filter";
-import {OptionObject} from "./redux/states/sort";
-import {tableActionsGenerators} from "./redux/actions/table/table";
+} from "../../redux/actions/filter/init-filter";
+import {OptionObject} from "../../redux/states/sort";
+import {tableActionsGenerators} from "../../redux/actions/table/table";
 import {Loading} from "./loader-wrapper/loader-utils-pages";
 
 interface FilterTableProps {
@@ -65,10 +65,10 @@ function mapStateToProps(state: FilterTableDefaultState) {
   }
 }
 
-const SearchTable = connect(
+const FilterTable = connect(
   mapStateToProps,
   mapDispatchToProps
 )(InternalFilterTable);
 
-export default SearchTable
+export default FilterTable
 

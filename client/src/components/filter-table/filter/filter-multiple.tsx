@@ -6,7 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import filterStyles from "./filter-styles";
 import FilterCommon from "./filter-common";
-import {FilterState} from "../redux/states/filter";
+import {FilterState} from "../../../redux/states/filter";
 
 const useStyles = makeStyles(theme => ({
   formGroup: {

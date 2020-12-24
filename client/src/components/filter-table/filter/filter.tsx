@@ -2,7 +2,7 @@ import React from "react";
 import FilterRange from "./filter-range";
 import FilterSingle from "./filter-single";
 import FilterMultiple from "./filter-multiple";
-import {FilterState, FilterTypes} from "../redux/states/filter";
+import {FilterState, FilterTypes} from "../../../redux/states/filter";
 import FilterMultipleTextarea from "./filter-multiple-textarea";
 
 interface FilterProps {

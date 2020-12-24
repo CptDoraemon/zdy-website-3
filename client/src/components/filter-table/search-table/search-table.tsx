@@ -6,16 +6,13 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import Checkbox from "@material-ui/core/Checkbox";
-import {Link} from "react-router-dom";
 import Pagination from "@material-ui/lab/Pagination";
 import cloneDeep from 'lodash/cloneDeep'
 import SearchTableControls from "./search-table-controls";
 import SearchTableHead from "./search-table-head";
 import SearchTableToolbar from "./search-table-toolbar";
-import routerUrls from "../../../router-urls";
-import {DefaultTableState} from "../redux/states/table";
-import {DefaultSortState} from "../redux/states/sort";
+import {DefaultTableState} from "../../../redux/states/table";
+import {DefaultSortState} from "../../../redux/states/sort";
 import LoaderWrapper from "../loader-wrapper/loader-wrapper";
 
 const useStyles = makeStyles((theme) => ({

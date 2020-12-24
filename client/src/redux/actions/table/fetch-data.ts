@@ -1,5 +1,5 @@
 import {tableActions} from "./table";
-import urls from "../../../../../services/urls";
+import urls from "../../../services/urls";
 import axios from "axios";
 import {FilterTypes} from "../../states/filter";
 import {TableData} from "../../states/table";

@@ -7,14 +7,13 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle, LinearProgress,
-  Link, Typography
+  DialogTitle,
+  Link
 } from "@material-ui/core";
 import dialogImage1 from './dialog-image-1.png';
 import dialogImage2 from './dialog-image-2.png';
 import {useSelector} from "react-redux";
-import {FilterTableDefaultState} from "../../app/filter-table/redux/states/root-states";
-import axios from 'axios';
+import {FilterTableDefaultState} from "../../redux/states/root-states";
 import {Alert} from "@material-ui/lab";
 
 const useGenerateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameElement>) => {

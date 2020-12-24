@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Provider } from 'react-redux';
-import configureTableStore from "./app/filter-table/redux/configure-store"
+import configureStore from "./redux/configure-store";
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,7 +29,7 @@ import Logout from "./pages/logout/logout";
 import Login from "./pages/login/login";
 import GenerateReport from "./pages/generate-report/generate-report";
 
-const tableStore = configureTableStore();
+const store = configureStore();
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -76,7 +76,7 @@ const InnerApp = observer(() => {
 
 const App = () => {
   return (
-    <Provider store={tableStore}>
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <InnerApp />

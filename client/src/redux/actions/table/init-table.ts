@@ -2,7 +2,7 @@ import {Dispatch} from "redux";
 import {FilterTableDefaultState} from "../../states/root-states";
 import axios from "axios";
 import {fetchDataFailed} from "./fetch-data";
-import urls from "../../../../../services/urls";
+import urls from "../../../services/urls";
 import {
   FilterInitializers, MultipleFilterTextareaInitializer
 } from "../filter/init-filter";

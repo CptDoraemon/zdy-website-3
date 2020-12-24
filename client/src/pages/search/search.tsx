@@ -1,6 +1,6 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import FilterTable from "../../app/filter-table/filter-table";
+import FilterTable from "../../components/filter-table/filter-table";
 import {sortOptions} from "./search-table-options";
 
 const useStyles = makeStyles(theme => ({

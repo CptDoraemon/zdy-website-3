@@ -1,11 +1,10 @@
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {FormControl} from "@material-ui/core";
-import filterStyles from "./filter-styles";
 import FilterCommon from "./filter-common";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Choice, FilterState} from "../redux/states/filter";
+import {FilterState} from "../../../redux/states/filter";
 
 const useStyles = makeStyles(theme => ({
   formControl: {

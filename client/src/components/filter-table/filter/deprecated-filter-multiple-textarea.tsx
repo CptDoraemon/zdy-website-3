@@ -1,6 +1,6 @@
-import React, {useMemo} from "react";
+import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import {FilterState} from "../redux/states/filter";
+import {FilterState} from "../../../redux/states/filter";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 
