@@ -1,4 +1,5 @@
 const routes = {
+  home: '/',
   landingPage: '/',
   search: '/search',
   contact: '/contact',

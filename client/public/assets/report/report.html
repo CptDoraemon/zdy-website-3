@@ -2,9 +2,13 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <title>Report</title>
+  <title>分子诊断中心测序报告单</title>
 </head>
 <body>
+
+  <div class="message no-print" id="message">
+    字体文件下载中，请稍候... <span id="font-load-progress">0%</span>
+  </div>
   <div contentEditable="true" class="print">
     <img class="logo" src="logo.png" alt="logo"/>
     <h1 class="center">分子诊断中心测序报告单</h1>
@@ -36,6 +40,7 @@
     window.onload = () => {
       setDateStrings();
       loadCss('./report.css');
+      loadFont();
     };
 
     function loadCss(filename) {
@@ -52,6 +57,32 @@
       var els = document.getElementsByClassName('date');
       for (var i=0; i<els.length; i++) {
         els[i].innerHTML = els[i].innerHTML + dateString
+      }
+    }
+
+    function loadFont() {
+      var progressTextEl = document.getElementById('font-load-progress');
+      var lastProgress = 0;
+
+      var xml = new XMLHttpRequest();
+      xml.addEventListener("load", loadHandler);
+      xml.addEventListener('progress', progressHandler);
+      xml.open("GET", "https://cdn-1302264317.cos.ap-nanjing.myqcloud.com/SimSun.ttf");
+      xml.send();
+
+      function loadHandler() {
+        loadCss('./font.css');
+        setTimeout(() => {
+          document.getElementById('message').remove();
+        }, 3000)
+      }
+
+      function progressHandler(e) {
+        var progress = Math.round(e.loaded / e.total * 100);
+        if (progress !== lastProgress) {
+          lastProgress = progress;
+          progressTextEl.innerText = `${progress}%`
+        }
       }
     }
   </script>

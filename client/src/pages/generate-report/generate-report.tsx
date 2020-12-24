@@ -17,30 +17,6 @@ import {FilterTableDefaultState} from "../../app/filter-table/redux/states/root-
 import axios from 'axios';
 import {Alert} from "@material-ui/lab";
 
-const useDownloadFont = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    (async () => {
-      await axios.request({
-        url: 'https://cdn-1302264317.cos.ap-nanjing.myqcloud.com/SimSun.ttf',
-        method: 'get',
-        onDownloadProgress: (e) => {
-          console.log(e)
-          setProgress(Math.round(e.loaded / e.total * 100))
-        }
-      });
-      setIsLoaded(true);
-    })();
-  }, []);
-
-  return {
-    isLoaded,
-    progress
-  }
-};
-
 const useGenerateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameElement>) => {
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
@@ -141,12 +117,7 @@ const GenerateReport = () => {
   const [infoOpen, setInfoOpen] = useState(true);
   const tableData = useSelector<FilterTableDefaultState>(state => state.table.data);
 
-  const {
-    isLoaded: isFontLoaded,
-    progress: fontLoadProgress
-  } = useDownloadFont();
   const setIsIframeLoaded = useGenerateTable(tableData, iframeRef);
-
 
   const handleDialogClose = () => {
     setDialogOpen(false)
@@ -182,31 +153,13 @@ const GenerateReport = () => {
         </Collapse>
       </div>
 
-      {
-        !isFontLoaded &&
-          <div className={classes.message}>
-            下载字体中，请稍候...
-            <Box display="flex" alignItems="center">
-              <Box width={65} mr={1}>
-                <LinearProgress variant="determinate" value={fontLoadProgress} />
-              </Box>
-              <Box minWidth={35}>
-                <Typography variant="body2" color="textSecondary">{`${fontLoadProgress}%`}</Typography>
-              </Box>
-            </Box>
-          </div>
-      }
-
-      {
-        isFontLoaded &&
-        <iframe
-            title='report'
-            ref={iframeRef}
-            src={process.env.PUBLIC_URL + '/assets/report/report.html'}
-            className={classes.iframe}
-            onLoad={() => setIsIframeLoaded(true)}
-        />
-      }
+      <iframe
+          title='report'
+          ref={iframeRef}
+          src={process.env.PUBLIC_URL + '/assets/report/report.html'}
+          className={classes.iframe}
+          onLoad={() => setIsIframeLoaded(true)}
+      />
 
       <Dialog
         open={dialogOpen}
