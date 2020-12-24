@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
   Box,
@@ -15,57 +15,19 @@ import dialogImage2 from './dialog-image-2.png';
 import {useSelector} from "react-redux";
 import {FilterTableDefaultState} from "../../redux/states/root-states";
 import {Alert} from "@material-ui/lab";
+import useHydrateTable from "./use-hydrate-table";
+import useHydrateBasicInfo from "./use-hydrate-baisc-info";
 
-const useGenerateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameElement>) => {
-  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+const useConnect = () => {
+  const tableData = useSelector<FilterTableDefaultState>(state => state.table.data);
+  const basicInfoData = useSelector((state: FilterTableDefaultState) => state.basicInfo.data);
+  const basicInfoDisplayNames = useSelector((state: FilterTableDefaultState) => state.basicInfo.displayNames);
 
-  useEffect(() => {
-    if (!tableData || !isIframeLoaded) {
-      return
-    }
-    const iframe = iframeRef.current;
-    if (!iframe || !iframe.contentDocument) {
-      return
-    }
-
-    const iframeDocument = iframe.contentDocument;
-    const header = ['Gene Symbol', '药品名', '药品类型', '病症', 'FDA Source'];
-    const keys = ['Gene_symbol', 'Drug_name', 'Drug_type', 'disease', 'FDA Source'];
-    const table = iframeDocument.getElementById('table');
-    if (!table) {
-      return
-    }
-
-    insertTableHeader();
-    // @ts-ignore
-    tableData.forEach(row => {
-      insertTableRow(row)
-    });
-
-    function insertTableHeader() {
-      const row = iframeDocument.createElement('tr');
-      header.forEach(name => {
-        const cell = iframeDocument.createElement('th');
-        cell.innerText = name;
-        row.appendChild(cell);
-      });
-      table!.appendChild(row);
-    }
-
-    function insertTableRow(data: string[]) {
-      const row = iframeDocument.createElement('tr');
-      keys.forEach(key => {
-        const cell = iframeDocument.createElement('td');
-        // @ts-ignore
-        cell.innerText = data[key];
-        row.appendChild(cell);
-      });
-      table!.appendChild(row);
-    }
-
-  }, [tableData, isIframeLoaded, iframeRef]);
-
-  return setIsIframeLoaded
+  return {
+    tableData,
+    basicInfoData,
+    basicInfoDisplayNames
+  }
 };
 
 const useStyles = makeStyles(theme => ({
@@ -114,9 +76,15 @@ const GenerateReport = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(true);
-  const tableData = useSelector<FilterTableDefaultState>(state => state.table.data);
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+  const {
+    tableData,
+    basicInfoData,
+    basicInfoDisplayNames
+  } = useConnect();
 
-  const setIsIframeLoaded = useGenerateTable(tableData, iframeRef);
+  useHydrateBasicInfo(basicInfoData, basicInfoDisplayNames, iframeRef, isIframeLoaded);
+  useHydrateTable(tableData, iframeRef, isIframeLoaded);
 
   const handleDialogClose = () => {
     setDialogOpen(false)
@@ -141,7 +109,7 @@ const GenerateReport = () => {
           <Box my={1}>
             <Alert severity="info" onClose={() => setInfoOpen(false)}>
               <div>
-                本页内容可编辑，如需隐藏页眉与页脚，请在
+                如需隐藏页眉与页脚，请在
                 <Link
                   onClick={() => setDialogOpen(true)}
                   className={classes.dialogLink}

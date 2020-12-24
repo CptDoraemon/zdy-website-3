@@ -8,7 +8,7 @@ body {
     background-color: rgb(96, 96, 96);
     width: 100%;
     margin: 0;
-    overflow-x: scroll;
+    overflow-x: auto;
     position: relative;
 }
 
@@ -65,11 +65,19 @@ body {
 .info-item {
     min-width: 33%;
     margin: 6pt 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .info-item-double {
     min-width: 66%;
     margin: 6pt 0;
+}
+
+.info-item-label {
+    flex-shrink: 0;
 }
 
 .table {

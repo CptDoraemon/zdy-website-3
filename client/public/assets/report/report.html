@@ -9,24 +9,13 @@
   <div class="message no-print" id="message">
     字体文件下载中，请稍候... <span id="font-load-progress">0%</span>
   </div>
-  <div contentEditable="true" class="print">
+  <div class="print">
     <img class="logo" src="logo.png" alt="logo"/>
     <h1 class="center">分子诊断中心测序报告单</h1>
     <h2>受检者基本信息</h2>
     <hr/>
-    <div class="info-section">
-      <span class="info-item bold">姓名： </span>
-      <span class="info-item bold">性别：</span>
-      <span class="info-item bold">年龄：</span>
-      <span class="info-item bold">病理编号：</span>
-      <span class="info-item bold">ID号：</span>
-      <span class="info-item bold">电话：</span>
-      <span class="info-item bold">诊断：</span>
-      <span class="info-item bold">申请科室：</span>
-      <span class="info-item bold date">申请日期：</span>
-      <span class="info-item-double bold">标本：</span>
-      <span class="info-item bold date">报告日期：</span>
-      <span class="info-item-double bold">检测项目：</span>
+    <div class="info-section" id="info-section">
+
     </div>
     <hr/>
 
@@ -72,8 +61,14 @@
 
       function loadHandler() {
         loadCss('./font.css');
+
+        var messageEl = document.getElementById('message');
+        while (messageEl.firstChild) {
+          messageEl.removeChild(messageEl.lastChild);
+        }
+        messageEl.innerText = '字体文件加载成功';
         setTimeout(() => {
-          document.getElementById('message').remove();
+          messageEl.remove();
         }, 3000)
       }
 
