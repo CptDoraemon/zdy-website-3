@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <title>Report</title>
-  <link rel="stylesheet" href="report.css">
 </head>
 <body>
   <div contentEditable="true" class="print">
@@ -35,14 +34,23 @@
 
   <script>
     window.onload = () => {
-      setDateStrings()
+      setDateStrings();
+      loadCss('./report.css');
     };
 
+    function loadCss(filename) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = filename;
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(link)
+    }
+
     function setDateStrings() {
-      const date = new Date();
-      const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-      const els = document.getElementsByClassName('date');
-      for (let i=0; i<els.length; i++) {
+      var date = new Date();
+      var dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      var els = document.getElementsByClassName('date');
+      for (var i=0; i<els.length; i++) {
         els[i].innerHTML = els[i].innerHTML + dateString
       }
     }

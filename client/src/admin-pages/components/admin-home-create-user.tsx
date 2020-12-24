@@ -12,11 +12,11 @@ import {useMount, useUnmount} from "react-use";
 
 const initForm = () => {
   return new FormService(
-    'create user', 'create',
+    '新建账户', '建立账户',
     new PostService(urls.adminCreateUser),
     [
-      new InputService(simpleValidator, 'username', 'username'),
-      new InputService(simpleValidator, 'password', 'password', 'password')
+      new InputService(simpleValidator, '用户名', 'username'),
+      new InputService(simpleValidator, '密码', 'password', 'password')
     ]
   )
 };

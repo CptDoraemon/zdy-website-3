@@ -11,6 +11,15 @@ import Paper from '@material-ui/core/Paper';
 import {IconButton} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+const getTimeString = (ISOString: string) => {
+  const date = new Date(ISOString);
+  const hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+  const minute = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+  return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()} - ${hour}:${minute}`
+};
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
@@ -38,17 +47,6 @@ interface AdminHomeTableProps {
 const AdminHomeTable = observer<React.FC<AdminHomeTableProps>>(({data, handleDeleteUser, isDeleteDisabled}) => {
   const classes = useStyles();
 
-  const rawHeaders = useMemo(() => {
-    if (!data.length) return [];
-    return Object.keys(data[0]);
-  }, [data]);
-  const headers = useMemo(() => {
-    if (!rawHeaders.length) return[];
-    const returned = rawHeaders.slice();
-    returned.push('delete user');
-    return returned
-  }, [rawHeaders]);
-
   const formatCell = (value: any) => {
     if (typeof value === "boolean") {
       return value ? 'Yes' : 'No'
@@ -59,6 +57,10 @@ const AdminHomeTable = observer<React.FC<AdminHomeTableProps>>(({data, handleDel
     }
   };
 
+  const headers = ['id', '用户名', '创建时间', '最后登录', '是否为管理员'];
+  const displayHeader = [...headers, '删除账户'];
+  const keys = ['id', 'username', 'created', 'lastLogin', 'isAdmin'];
+
   return (
     <div className={classes.root}>
       <TableContainer component={Paper} elevation={0}>
@@ -66,7 +68,7 @@ const AdminHomeTable = observer<React.FC<AdminHomeTableProps>>(({data, handleDel
           <TableHead>
             <TableRow>
               {
-                headers.map(cell => <TableCell key={cell} className={classes.headerRow}>{cell}</TableCell>)
+                displayHeader.map(cell => <TableCell key={cell} className={classes.headerRow}>{cell}</TableCell>)
               }
             </TableRow>
           </TableHead>
@@ -74,7 +76,13 @@ const AdminHomeTable = observer<React.FC<AdminHomeTableProps>>(({data, handleDel
             {data.map((row) => (
               <TableRow key={row.id}>
                 {
-                  rawHeaders.map(column => <TableCell key={column}>{formatCell(row[column])}</TableCell>)
+                  keys.map(key => <TableCell key={key}>
+                    {
+                      key === 'created' || key === 'lastLogin' ?
+                        getTimeString(row[key]) :
+                        formatCell(row[key])
+                    }
+                  </TableCell>)
                 }
                 <TableCell>
                   <IconButton aria-label="delete user" disabled={isDeleteDisabled} onClick={() => handleDeleteUser(row.username)}>

@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'SimSun';
-    src: url(./SimSun.ttf) format("truetype");
+    src: url(https://cdn-1302264317.cos.ap-nanjing.myqcloud.com/SimSun.ttf) format("truetype");
 }
 
 :root {

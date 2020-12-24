@@ -44,7 +44,7 @@ const AdminHome = observer(() => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.title}>all users</div>
+      <div className={classes.title}>全部账户</div>
       {
         allUsers.isLoading && <CircularProgress/>
       }
