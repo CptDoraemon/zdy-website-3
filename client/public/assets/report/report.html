@@ -50,23 +50,31 @@
     }
 
     function loadFont() {
+      var fontUrl = 'https://cdn-1302264317.file.myqcloud.com/SimSun.ttf';
       var progressTextEl = document.getElementById('font-load-progress');
       var lastProgress = 0;
 
-      var xml = new XMLHttpRequest();
-      xml.addEventListener("load", loadHandler);
-      xml.addEventListener('progress', progressHandler);
-      xml.open("GET", "https://cdn-1302264317.cos.ap-nanjing.myqcloud.com/SimSun.ttf");
-      xml.send();
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", loadHandler);
+      xhr.addEventListener('progress', progressHandler);
+      xhr.open("GET", fontUrl);
+      xhr.send();
 
       function loadHandler() {
-        loadCss('./font.css');
+        var isSucceeded = xhr.status >= 200 && xhr.status < 300;
 
+        // load font via css
+        var styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = `@font-face {font-family: 'SimSun'; src: url(${fontUrl}) format("truetype");}`;
+        document.head.appendChild(styleSheet);
+
+        // update message
         var messageEl = document.getElementById('message');
         while (messageEl.firstChild) {
           messageEl.removeChild(messageEl.lastChild);
         }
-        messageEl.innerText = '字体文件加载成功';
+        messageEl.innerText = isSucceeded ? '字体文件加载成功' : '字体文件加载失败';
         setTimeout(() => {
           messageEl.remove();
         }, 3000)
