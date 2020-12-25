@@ -33,7 +33,7 @@ const useConnect = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    overflow: 'scroll'
+    overflow: 'auto'
   },
   message: {
     width: '100%',
