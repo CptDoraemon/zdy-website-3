@@ -6,7 +6,6 @@ import urls from "../services/urls";
 import {useMount} from "react-use";
 import {CircularProgress} from "@material-ui/core";
 import AdminHomeTable from "./components/admin-home-table";
-import PostService from "../services/post.service";
 import AdminHomeCreateUser from "./components/admin-home-create-user";
 
 interface IAllUserResponse {
@@ -17,11 +16,23 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
+  section: {
+    width: '100%',
+    marginBottom: theme.spacing(5)
+  },
   title: {
     fontSize: theme.typography.h5.fontSize,
     textTransform: 'capitalize',
     fontWeight: 700
-  }
+  },
+  loaderWrapper: {
+    width: '100%',
+    height: 250,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 }));
 
 const AdminHome = observer(() => {
@@ -44,15 +55,24 @@ const AdminHome = observer(() => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.title}>全部账户</div>
-      {
-        allUsers.isLoading && <CircularProgress/>
-      }
-      {
-        allUsers.data !== null &&
-        <AdminHomeTable data={allUsers.data.users} handleDeleteUser={handleDeleteUser} isDeleteDisabled={deleteUser.isLoading}/>
-      }
-      <AdminHomeCreateUser refresh={getAllUsers}/>
+      <div className={classes.section}>
+        <div className={classes.title}>全部账户</div>
+        {
+          allUsers.isLoading &&
+          <div className={classes.loaderWrapper}>
+            <CircularProgress/>
+          </div>
+        }
+        {
+          allUsers.data !== null &&
+          <AdminHomeTable data={allUsers.data.users} handleDeleteUser={handleDeleteUser} isDeleteDisabled={deleteUser.isLoading}/>
+        }
+      </div>
+
+      <div className={classes.section}>
+        <div className={classes.title}>建立账户</div>
+        <AdminHomeCreateUser refresh={getAllUsers}/>
+      </div>
     </div>
   )
 });

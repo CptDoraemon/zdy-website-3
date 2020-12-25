@@ -7,11 +7,13 @@ import {CircularProgress} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
 import routerUrls from "../../router-urls";
 import {useLocation} from "react-router-dom";
+import { LinearProgress } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%'
-  },
+  loader: {
+    width: 80,
+    margin: 'auto 0'
+  }
 }));
 
 interface LandingPageProps {
@@ -30,9 +32,7 @@ const LandingPage: React.FC<LandingPageProps> = observer(() => {
   });
 
   if (!isLoginVerified) {
-    return (
-      <CircularProgress />
-    )
+    return <LinearProgress className={classes.loader}/>
   }
 
   // @ts-ignore

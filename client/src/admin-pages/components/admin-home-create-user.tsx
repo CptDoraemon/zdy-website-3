@@ -6,9 +6,9 @@ import PostService from "../../services/post.service";
 import urls from "../../services/urls";
 import InputService from "../../services/form/input.service";
 import simpleValidator from "../../services/form/simple-validator";
-import Form from "../../components/form/form";
 import {IReactionDisposer, reaction} from "mobx";
 import {useMount, useUnmount} from "react-use";
+import AdminHomeCreateUserForm from "./admin-home-create-user-form";
 
 const initForm = () => {
   return new FormService(
@@ -54,7 +54,7 @@ const AdminHomeCreateUser = observer<React.FC<AdminHomeCreateUserProps>>(({refre
   });
 
   return (
-      <Form title={formService.title} buttonText={formService.buttonText} onSubmit={formService.submit} fields={formService.fields} request={formService.request}/>
+      <AdminHomeCreateUserForm buttonText={formService.buttonText} onSubmit={formService.submit} fields={formService.fields} request={formService.request}/>
   )
 });
 
