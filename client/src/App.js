@@ -53,26 +53,36 @@ const InnerApp = observer(() => {
       <AccountContext.Provider value={accountService}>
         <Router basename={process.env.PUBLIC_URL}>
           <RouterScrollRestoration />
-          <Header data={navTabsDataForHeader} homeLink={routerUrls.home}/>
-          <MainWrapper>
-            <Switch>
-              <Route path={routerUrls.landingPage} exact render={ () => <LandingPage/> } />
-              <LoginRequired path={routerUrls.search} exact render={ () => <Search/> } />
-              <LoginRequired path={routerUrls.contact} exact render={ () => <div>contact</div> } />
-              <LoginRequired path={routerUrls.logout} exact render={ () => <Logout /> } />
-              <LoginRequired path={routerUrls.generateReport} exact render={ () => <GenerateReport /> } />
-              <Route path={routerUrls.login} exact render={ () => <Login/> } />
-              <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />
-              <AdminRequired path={routerUrls.adminHome} exact render={ () => <AdminHome/> } />
-              <Route path={routerUrls.fallback} exact render={ () => <LandingPage/> } />
-            </Switch>
-          </MainWrapper>
-          <Footer/>
+          <Switch>
+            <Route path={routerUrls.landingPage} exact render={ () => <LandingPage/> } />
+            <Route path={routerUrls.login} exact render={ () => <Login/> } />
+            <Route path={routerUrls.fallback} render={ () => <RoutesWithHeaderAndFooter/> } />
+          </Switch>
         </Router>
       </AccountContext.Provider>
     </div>
   );
 });
+
+const RoutesWithHeaderAndFooter = () => {
+  return (
+    <>
+      <Header data={navTabsDataForHeader} homeLink={routerUrls.home}/>
+        <MainWrapper>
+          <Switch>
+            <LoginRequired path={routerUrls.search} exact render={ () => <Search/> } />
+            <LoginRequired path={routerUrls.contact} exact render={ () => <div>contact</div> } />
+            <LoginRequired path={routerUrls.logout} exact render={ () => <Logout /> } />
+            <LoginRequired path={routerUrls.generateReport} exact render={ () => <GenerateReport /> } />
+            <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />
+            <AdminRequired path={routerUrls.adminHome} exact render={ () => <AdminHome/> } />
+            <Route path={routerUrls.fallback} render={ () => <LandingPage/> } />
+          </Switch>
+        </MainWrapper>
+        <Footer/>
+      </>
+  )
+};
 
 const App = () => {
   return (

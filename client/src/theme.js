@@ -16,7 +16,7 @@ let theme = createMuiTheme({
     }
   },
   typography: {
-    "fontFamily": "system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
+    "fontFamily": '"Gotham", Helvetica, Arial, PingFangSC-Regular, "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;',
     "fontSize": 14,
     "fontWeightLight": 300,
     "fontWeightRegular": 400,

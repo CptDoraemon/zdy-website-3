@@ -1,44 +1,97 @@
 import React, {useState} from "react";
-import { observer } from "mobx-react"
-import Form from "../../components/form/form";
-import FormService from "../../services/form/form.service";
-import PostService from "../../services/post.service";
-import urls from "../../services/urls";
-import InputService from "../../services/form/input.service";
-import simpleValidator from "../../services/form/simple-validator";
-import useRedirectWhenValueNotNull from "../../utils/use-redirect-on-change";
+import useGetScreenSize from "./use-get-screen-size";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import LoginFormContainer from "./login-form-container";
+import {Box, Button, Slide, Typography} from "@material-ui/core";
+import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import Logo from "../../components/logo/logo";
 
-interface IBody {
-  username: string,
-  password: string,
-}
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  left: {
+    width: 600,
+    maxWidth: '100%',
+    height: '100%',
+    flex: '0 0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    backgroundColor: '#fff',
+    overflow: 'hidden'
+  },
+  logo: {
+    position: 'absolute',
+    top: 15,
+    left: '50%',
+    transform: 'translateX(-50%)'
+  },
+  loginForm: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginFormMessage: {
+    width: '80%',
+  },
+  demo: {
+    height: '100%',
+    flex: '1 1 auto',
+    backgroundColor: '#eee'
+  }
+}));
 
-interface IResponse {
-  username: string
-}
+const Login: React.FC = () => {
+  const classes = useStyles();
+  const screenHeight = useGetScreenSize();
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
-const Login = observer(() => {
-  const [service] = useState(() => {
-    return new FormService(
-      '登录',
-      '登录',
-      new PostService<IBody, IResponse>(urls.login),
-      [
-        new InputService(simpleValidator, '用户名', 'username'),
-        new InputService(simpleValidator, '密码', 'password','password')
-      ]
-    )
-  });
-
-  useRedirectWhenValueNotNull(() => service.request.data);
+  if (!screenHeight) {
+    return <></>
+  }
 
   return (
-    <>
-      <Logo/>
-      <Form title={service.title} buttonText={service.buttonText} onSubmit={service.submit} fields={service.fields} request={service.request}/>
-    </>
+    <div className={classes.root} style={{height: screenHeight}}>
+      <div className={classes.left}>
+        <div className={classes.logo}>
+          <Logo width={'300px'}/>
+        </div>
+        {
+          showLoginForm &&
+          <Slide in={true} direction={'left'}>
+            <div className={classes.loginForm}>
+              <LoginFormContainer/>
+            </div>
+          </Slide>
+        }
+        {
+          !showLoginForm &&
+            <div>
+              <Typography variant={'h5'} component={'h1'}>
+                <Box fontWeight={700} mb={1}>
+                  心情惬意，来测个序吧 🔬
+                </Box>
+              </Typography>
+              <Button color={'primary'} startIcon={<RecentActorsIcon/>} onClick={() => setShowLoginForm(true)} style={{marginLeft: -4}}>
+                登录
+              </Button>
+            </div>
+        }
+      </div>
+      <div className={classes.demo}>
+
+      </div>
+    </div>
   )
-});
+};
 
 export default Login
