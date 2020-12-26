@@ -53,11 +53,8 @@ jobs:
             StrictHostKeyChecking no
           END
 
-      - name: Server restart
-        run: ssh $HOST 'cd ~/zdy-website-3-docker'
-
       - name: Stop
-        run: ssh $HOST 'sudo docker-compose stop'
+        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose stop'
 
       - name: Up
-        run: ssh $HOST 'sudo docker-compose up'
+        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose up'
