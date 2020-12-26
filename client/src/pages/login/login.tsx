@@ -85,7 +85,7 @@ const Login: React.FC = () => {
             <div>
               <Typography variant={'h5'} component={'h1'}>
                 <Box fontWeight={700} mb={1}>
-                  心情惬意，来测个序吧 🔬
+                  1心情惬意，来测个序吧 🔬
                 </Box>
               </Typography>
               <Button color={'primary'} startIcon={<RecentActorsIcon/>} onClick={() => setShowLoginForm(true)} style={{marginLeft: -4}}>

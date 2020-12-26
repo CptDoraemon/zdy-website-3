@@ -8,7 +8,7 @@ jobs:
   # Set the job key. The key is displayed as the job name
   # when a job name is not provided
   docker-build-push:
-    name: Build Docker image and push to Docker Hub
+    name: CI-CD
     runs-on: ubuntu-latest
 
     steps:
@@ -35,10 +35,6 @@ jobs:
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-  deploy:
-    name: Deploy latest image on server
-    runs-on: ubuntu-latest
-    steps:
       - name: Configure SSH
         env:
           SSH_USER: ${{ secrets.SSH_USERNAME }}
@@ -57,8 +53,8 @@ jobs:
             StrictHostKeyChecking no
           END
 
-      - name: CD
-        run: ssh $HOST 'cd /zdy-website-3-docker'
+      - name: Change directory
+        run: ssh $HOST 'cd ~/zdy-website-3-docker'
 
       - name: Stop
         run: ssh $HOST 'sudo docker-compose stop'
