@@ -12,12 +12,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   left: {
     width: 600,
     maxWidth: '100%',
-    height: '100%',
     flex: '0 0 auto',
     display: 'flex',
     flexDirection: 'column',
@@ -46,7 +45,15 @@ const useStyles = makeStyles(theme => ({
   demo: {
     height: '100%',
     flex: '1 1 auto',
-    backgroundColor: '#eee'
+    backgroundColor: '#eee',
+    position: 'relative',
+  },
+  background: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    backgroundPosition: '0 100%',
+    position: 'absolute'
   }
 }));
 
@@ -60,8 +67,8 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className={classes.root} style={{height: screenHeight}}>
-      <div className={classes.left}>
+    <div className={classes.root} >
+      <div className={classes.left} style={{height: screenHeight}}>
         <div className={classes.logo}>
           <Logo width={'300px'}/>
         </div>
@@ -87,8 +94,8 @@ const Login: React.FC = () => {
             </div>
         }
       </div>
-      <div className={classes.demo}>
-
+      <div className={classes.demo} style={{height: screenHeight}}>
+        <img src={process.env.PUBLIC_URL + '/assets/background.jpg'} alt={'background'} className={classes.background}/>
       </div>
     </div>
   )

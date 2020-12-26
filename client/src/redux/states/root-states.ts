@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import defaultFilterState, {DefaultFilterState} from "./filter";
 import defaultSortState, {DefaultSortState} from "./sort";
 import defaultTableState, {DefaultTableState} from "./table";
