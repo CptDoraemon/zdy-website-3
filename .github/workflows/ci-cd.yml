@@ -40,8 +40,8 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USERNAME }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          HOST: prod
         run: |
+          echo "HOST=prod" >> $GITHUB_ENV
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/$HOST.key
           chmod 600 ~/.ssh/$HOST.key
@@ -53,11 +53,11 @@ jobs:
             StrictHostKeyChecking no
           END
 
-      - name: Change directory
-        run: ssh "$HOST" 'cd ~/zdy-website-3-docker'
+      - name: Server restart
+        run: ssh $HOST 'cd ~/zdy-website-3-docker'
 
       - name: Stop
-        run: ssh "$HOST" 'sudo docker-compose stop'
+        run: ssh $HOST 'sudo docker-compose stop'
 
       - name: Up
-        run: ssh "$HOST" 'sudo docker-compose up'
+        run: ssh $HOST 'sudo docker-compose up'
