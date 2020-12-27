@@ -53,8 +53,11 @@ jobs:
             StrictHostKeyChecking no
           END
 
+      - name: Pull
+        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose pull'
+
       - name: Stop
         run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose stop'
 
       - name: Up
-        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose up'
+        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose up --detach'
