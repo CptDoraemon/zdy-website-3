@@ -10,6 +10,9 @@ jobs:
   docker-build-push:
     name: CI-CD
     runs-on: ubuntu-latest
+    
+    env: 
+      WKDIR: ${{ secrets.WKDIR }}
 
     steps:
       -
@@ -40,7 +43,6 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USERNAME }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          WKDIR: ${{ secrets.WKDIR }}
         run: |
           echo "HOST=prod" >> $GITHUB_ENV
           mkdir -p ~/.ssh/
