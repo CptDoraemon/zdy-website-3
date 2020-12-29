@@ -40,6 +40,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USERNAME }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          WKDIR: ${{ secrets.WKDIR }}
         run: |
           echo "HOST=prod" >> $GITHUB_ENV
           mkdir -p ~/.ssh/
@@ -54,10 +55,10 @@ jobs:
           END
 
       - name: Pull
-        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose pull'
+        run: ssh $HOST "cd $WKDIR && sudo docker-compose pull"
 
       - name: Stop
-        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose stop'
+        run: ssh $HOST 'cd $WKDIR && sudo docker-compose stop'
 
       - name: Up
-        run: ssh $HOST 'cd ~/zdy-website-3-docker && sudo docker-compose up --detach'
+        run: ssh $HOST 'cd $WKDIR && sudo docker-compose up --detach'
