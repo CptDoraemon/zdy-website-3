@@ -69,9 +69,9 @@ const Login: React.FC = () => {
   return (
     <div className={classes.root} >
       <div className={classes.left} style={{height: screenHeight}}>
-        <div className={classes.logo}>
-          <Logo width={'300px'}/>
-        </div>
+        {/*<div className={classes.logo}>*/}
+        {/*  <Logo width={'300px'}/>*/}
+        {/*</div>*/}
         {
           showLoginForm &&
           <Slide in={true} direction={'left'}>
