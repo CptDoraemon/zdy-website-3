@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   table: {
-    width: '100%',
+    minWidth: theme.breakpoints.values['md']
   },
   moreInfo: {
     '&:hover': {
@@ -112,11 +112,12 @@ const InnerSearchTable = React.forwardRef<HTMLDivElement, InnerSearchTableProps>
       <Paper className={classes.paper} elevation={0}>
         <SearchTableToolbar selected={selectedIDs} title={title} totalRows={totalRows}/>
         <SearchTableControls sort={sortState} sortUpdater={sortUpdater} dense={dense} toggleDense={toggleDense}/>
-        <TableContainer className={classes.table}>
+        <TableContainer>
           <Table
             stickyHeader
             size={dense ? 'small' : 'medium'}
             aria-label="data table"
+            className={classes.table}
           >
             <SearchTableHead
               header={header}

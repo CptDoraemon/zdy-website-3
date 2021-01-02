@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {observer} from "mobx-react";
 import Table from '@material-ui/core/Table';
@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.h5.fontSize,
     textTransform: 'capitalize',
     fontWeight: 700
+  },
+  table: {
+    minWidth: theme.breakpoints.values['md']
   },
   headerRow: {
     textTransform: 'capitalize',
@@ -64,7 +67,7 @@ const AdminHomeTable = observer<React.FC<AdminHomeTableProps>>(({data, handleDel
   return (
     <div className={classes.root}>
       <TableContainer component={Paper} elevation={0}>
-        <Table aria-label="all users table">
+        <Table aria-label="all users table" className={classes.table}>
           <TableHead>
             <TableRow>
               {
