@@ -19,7 +19,7 @@ export class TableDataQueryDto {
     return array.map(str => decodeURIComponent(str))
   })
   @IsOptional()
-  'Gene' = undefined;
+  'Gene_symbol' = undefined;
 
   // @IsInt({ each: true })
   // @Transform((value: string) => {
