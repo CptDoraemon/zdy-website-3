@@ -7,25 +7,25 @@ export class TableDataEntity {
   'id': number;
 
   @Column()
-  'Gene_symbol': string;
+  'Gene': string;
 
   @Column({
     nullable: true
   })
-  'Drug_name': string;
+  'Alterations': string;
 
   @Column({
     nullable: true
   })
-  'Drug_type': string;
+  'Cancer_Type': string;
 
   @Column({
     nullable: true
   })
-  'disease': string;
+  'Drugs': string;
 
   @Column({
     nullable: true
   })
-  'FDA Source': string;
+  'Level': string;
 }

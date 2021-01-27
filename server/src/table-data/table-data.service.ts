@@ -33,10 +33,10 @@ export class TableDataService implements OnApplicationBootstrap {
     await generateCsvFile(jsonData, ws);
   }
 
-  async getTableData(sortBy, sortOrder, rowPerPage, page, Gene_symbol) {
+  async getTableData(sortBy, sortOrder, rowPerPage, page, Gene) {
     const skip = (page - 1) * rowPerPage;
 
-    const where = Gene_symbol ? {where: {'Gene_symbol': In(Gene_symbol)}} : {};
+    const where = Gene ? {where: {'Gene': In(Gene)}} : {};
 
     const result = await this.repository.find({
       ...where,

@@ -15,8 +15,8 @@ export class TableDataController {
     @Query() query: TableDataQueryDto
   ): Promise<SuccessResponse<TableDataDto>> {
 
-    const {sortBy, sortOrder, rowPerPage, page, Gene_symbol} = query;
-    const {result, totalRows} = await this.tableDataService.getTableData(sortBy, sortOrder, rowPerPage, page, Gene_symbol);
+    const {sortBy, sortOrder, rowPerPage, page, Gene} = query;
+    const {result, totalRows} = await this.tableDataService.getTableData(sortBy, sortOrder, rowPerPage, page, Gene);
 
     return {
       status: 'ok',

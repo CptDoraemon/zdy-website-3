@@ -3,7 +3,7 @@ import {Transform} from "class-transformer";
 
 export class TableDataQueryDto {
   @IsString()
-  sortBy = 'Gene_symbol';
+  sortBy = 'Gene';
 
   @IsIn(['ASC' , 'DESC'])
   @Transform((value: string) => value.toUpperCase())
@@ -19,7 +19,7 @@ export class TableDataQueryDto {
     return array.map(str => decodeURIComponent(str))
   })
   @IsOptional()
-  'Gene_symbol' = undefined;
+  'Gene' = undefined;
 
   // @IsInt({ each: true })
   // @Transform((value: string) => {

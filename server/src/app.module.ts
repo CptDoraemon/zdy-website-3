@@ -34,7 +34,7 @@ import { AdminModule } from './admin/admin.module';
           TableDataEntity,
           UserEntity
         ],
-        synchronize: true
+        synchronize: false
       }),
       inject: [ConfigService],
     }),
