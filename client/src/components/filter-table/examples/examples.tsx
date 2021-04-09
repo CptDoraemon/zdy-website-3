@@ -91,9 +91,6 @@ const useStyles = makeStyles(theme => ({
   resetButton: {
     ...warningButtonStyles(theme).root,
     margin: theme.spacing(0, 1),
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(1, 0),
-    }
   }
 }));
 
@@ -131,7 +128,7 @@ const useConnect = () => {
       },
       {
         key: 'diagnose',
-        value: '1、乙状结肠中分化腺癌，2、缺铁性贫血',
+        value: '1、乙状结肠中分化腺癌 \n2、缺铁性贫血',
       },
       {
         key: 'department',

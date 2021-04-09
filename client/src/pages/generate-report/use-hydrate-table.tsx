@@ -23,8 +23,8 @@ const useHydrateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameEl
 
     insertTableHeader();
     // @ts-ignore
-    tableData.forEach(row => {
-      insertTableRow(row)
+    tableData.forEach((row, i) => {
+      insertTableRow(row, i + 1)
     });
 
     function insertTableHeader() {
@@ -37,12 +37,12 @@ const useHydrateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameEl
       table!.appendChild(row);
     }
 
-    function insertTableRow(data: string[]) {
+    function insertTableRow(data: string[], rowIndex: number) {
       const row = iframeDocument.createElement('tr');
       tableHeaderKeys.forEach(key => {
         const cell = iframeDocument.createElement('td');
         // @ts-ignore
-        cell.innerText = data[key];
+        cell.innerText = key === 'id' ? rowIndex : data[key];
         row.appendChild(cell);
       });
       table!.appendChild(row);
