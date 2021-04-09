@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(1, 0),
       padding: theme.spacing(1),
+      flexDirection: 'column',
     }
   },
   avatar: {
@@ -53,6 +54,11 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 15,
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(1),
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
     }
   },
   content: {
@@ -63,13 +69,17 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(1),
+      width: '100%',
     }
   },
   name: {
     fontWeight: 700,
     width: '100%',
     textAlign: 'start',
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      textAlign: 'center',
+    }
   }
 }));
 
