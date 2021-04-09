@@ -11,12 +11,12 @@ const sortOptions: OptionObject[] = [
   },
   {
     items: [
-      {internalName: '20', displayName: '20'},
-      {internalName: '50', displayName: '50'},
       {internalName: '100', displayName: '100'},
+      {internalName: '200', displayName: '200'},
+      {internalName: '500', displayName: '500'},
     ],
     title: {internalName: 'rowPerPage', displayName: '行数'},
-    selected: '20'
+    selected: '100'
   },
 ];
 

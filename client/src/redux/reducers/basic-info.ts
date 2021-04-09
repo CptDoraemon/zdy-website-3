@@ -7,6 +7,7 @@ function basicInfo(state = filterTableDefaultState.basicInfo, actions: any) {
 
   switch (actions.type) {
     case basicInfoActions.BASIC_INFO_UPDATE_VALUE:
+      // @ts-ignore
       newState.data[actions.key] = actions.value;
       return newState;
     case basicInfoActions.BASIC_INFO_TOGGLE_DROPDOWN:

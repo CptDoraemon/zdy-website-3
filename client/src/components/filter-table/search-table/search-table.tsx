@@ -30,6 +30,7 @@ export const tableHeaderKeys = Object.keys(tableHeaderMap);
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    margin: theme.spacing(4, 0)
   },
   paper: {
     width: '100%',

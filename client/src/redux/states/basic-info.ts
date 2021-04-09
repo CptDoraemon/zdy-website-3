@@ -1,20 +1,16 @@
 import cloneDeep from 'lodash/cloneDeep'
 
-interface Data {
-  [key: string]: string
-}
-
 export interface DefaultBasicInfoState {
   isDropdown: boolean,
-  data: Data,
-  defaultData: Data,
-  displayNames: Data
+  data: typeof defaultData,
+  defaultData: typeof defaultData,
+  displayNames: typeof defaultData,
 }
 
 const date = new Date();
 const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
-const defaultData: Data = {
+const defaultData = {
   'name': '',
   'sex': '',
   'age': '',

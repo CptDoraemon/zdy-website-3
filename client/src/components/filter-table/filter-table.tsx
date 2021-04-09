@@ -11,6 +11,7 @@ import {OptionObject} from "../../redux/states/sort";
 import {tableActionsGenerators} from "../../redux/actions/table/table";
 import {Loading} from "./loader-wrapper/loader-utils-pages";
 import BasicInfo from "./basic-info/basic-info";
+import Examples from "./examples/examples";
 
 interface FilterTableProps {
   title: string,
@@ -44,6 +45,7 @@ const InternalFilterTable: React.FC<FilterTableProps> = (
         {/*@ts-ignore*/}
         <FiltersGroupContainer />
         <BasicInfo/>
+        <Examples/>
         <SearchTableContainer title={title}/>
       </> :
       <Loading/>

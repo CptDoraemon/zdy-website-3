@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 2),
     padding: theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
+      width: `calc(100% - ${theme.spacing(1) * 2}px)`,
       margin: theme.spacing(1, 0),
       padding: theme.spacing(1),
       flexDirection: 'column',
@@ -68,17 +69,18 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(1),
-      width: '100%',
+      margin: theme.spacing(0, 2, 1, 2),
+      width: `calc(100% - ${theme.spacing(2) * 2}px)`,
     }
   },
   name: {
     fontWeight: 700,
     width: '100%',
     textAlign: 'start',
-    marginBottom: theme.spacing(2),
+    margin: theme.spacing(0, 0, 2, 0),
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
+      margin: theme.spacing(1, 0),
     }
   }
 }));

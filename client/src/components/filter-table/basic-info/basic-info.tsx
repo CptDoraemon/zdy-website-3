@@ -8,7 +8,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {successButtonStyles, warningButtonStyles} from "../../../styles";
 import {Link} from "react-router-dom";
 import routerUrls from "../../../router-urls";
-import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -106,9 +105,11 @@ const BasicInfo: React.FC<BasicInfoProps> = () => {
           keys.map(key => <TextField
             key={key}
             className={classes.inputField}
+            // @ts-ignore
             label={displayNames[key]}
             name={key}
             variant="outlined"
+            // @ts-ignore
             value={data[key]}
             onChange={changeHandler}
             size={'small'}
