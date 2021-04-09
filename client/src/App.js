@@ -28,6 +28,7 @@ import AdminHome from "./admin-pages/admin-home";
 import Logout from "./pages/logout/logout";
 import Login from "./pages/login/login";
 import GenerateReport from "./pages/generate-report/generate-report";
+import Contact from "./pages/contact/contact";
 
 const store = configureStore();
 
@@ -70,8 +71,8 @@ const RoutesWithHeaderAndFooter = () => {
       <Header data={navTabsDataForHeader} homeLink={routerUrls.home}/>
         <MainWrapper>
           <Switch>
-            <LoginRequired path={routerUrls.search} exact render={ () => <Search/> } />
-            <LoginRequired path={routerUrls.contact} exact render={ () => <div>contact</div> } />
+            <LoginRequired path={routerUrls.search} exact render={ () => <Search /> } />
+            <LoginRequired path={routerUrls.contact} exact render={ () => <Contact /> } />
             <LoginRequired path={routerUrls.logout} exact render={ () => <Logout /> } />
             <LoginRequired path={routerUrls.generateReport} exact render={ () => <GenerateReport /> } />
             <Route path={routerUrls.adminRegister} exact render={ () => <AdminRegister/> } />

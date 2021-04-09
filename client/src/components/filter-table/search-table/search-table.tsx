@@ -15,6 +15,18 @@ import {DefaultTableState} from "../../../redux/states/table";
 import {DefaultSortState} from "../../../redux/states/sort";
 import LoaderWrapper from "../loader-wrapper/loader-wrapper";
 
+export const tableHeaderMap = {
+  'id': '序号',
+  'Gene': '基因',
+  'Alterations': '突变',
+  'Cancer_Type': '肿瘤类型',
+  'Drugs': '靶向药物',
+  'Level': '药物级别'
+};
+
+export const tableHeaderValues = Object.values(tableHeaderMap);
+export const tableHeaderKeys = Object.keys(tableHeaderMap);
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -71,10 +83,6 @@ const InnerSearchTable = React.forwardRef<HTMLDivElement, InnerSearchTableProps>
   const currentPage = tableState.currentPage;
   const totalRows = tableState.totalRows;
 
-  const header = useMemo(() => {
-    return Object.keys(data ? data[0] : {});
-  }, [data]);
-
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelecteds: Selecteds = {};
@@ -120,7 +128,7 @@ const InnerSearchTable = React.forwardRef<HTMLDivElement, InnerSearchTableProps>
             className={classes.table}
           >
             <SearchTableHead
-              header={header}
+              header={tableHeaderValues}
               numSelected={selectedIDs.length}
               onSelectAllClick={handleSelectAllClick}
               rowCount={data.length}
@@ -140,7 +148,7 @@ const InnerSearchTable = React.forwardRef<HTMLDivElement, InnerSearchTableProps>
                       key={i}
                     >
                       {
-                        header.map((key, i) => (
+                        tableHeaderKeys.map((key, i) => (
                           <TableCell align="left" key={i}>{row[key]}</TableCell>
                         ))
                       }

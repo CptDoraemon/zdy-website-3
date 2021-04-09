@@ -1,10 +1,8 @@
 import React, {useState} from "react";
-import useGetScreenSize from "./use-get-screen-size";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import LoginFormContainer from "./login-form-container";
 import {Box, Button, Slide, Typography} from "@material-ui/core";
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
-import Logo from "../../components/logo/logo";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,6 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    height: '100vh'
   },
   left: {
     width: 600,
@@ -21,10 +20,19 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     position: 'relative',
     backgroundColor: '#fff',
-    overflow: 'hidden'
+    height: '100%',
+    overflowY: 'auto'
+  },
+  leftRow: {
+    flex: '1 0 auto',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
     position: 'absolute',
@@ -54,34 +62,47 @@ const useStyles = makeStyles(theme => ({
     objectFit: 'cover',
     backgroundPosition: '0 100%',
     position: 'absolute'
+  },
+  introduction: {
+    width: '100%',
+    maxWidth: 400,
+    padding: theme.spacing(2),
+    '& p': {
+      margin: theme.spacing(2, 0)
+    }
   }
 }));
 
 const Login: React.FC = () => {
   const classes = useStyles();
-  const screenHeight = useGetScreenSize();
   const [showLoginForm, setShowLoginForm] = useState(false);
-
-  if (!screenHeight) {
-    return <></>
-  }
 
   return (
     <div className={classes.root} >
-      <div className={classes.left} style={{height: screenHeight}}>
-        {/*<div className={classes.logo}>*/}
-        {/*  <Logo width={'300px'}/>*/}
-        {/*</div>*/}
-        {
-          showLoginForm &&
-          <Slide in={true} direction={'left'}>
-            <div className={classes.loginForm}>
-              <LoginFormContainer/>
-            </div>
-          </Slide>
-        }
-        {
-          !showLoginForm &&
+      <div className={classes.left}>
+
+        <div className={classes.leftRow}>
+          <div className={classes.introduction}>
+            <Typography variant={"body1"}>
+              CIT-CoPT（Capture sequencing for Identifying Targets for Colorectal Personalized Therapy）是基于结直肠癌基因测序分析的临床个体化精准治疗新技术平台。平台建立了结直肠癌药物-靶标基因列表，对病人肿瘤样本进行针对性的外显子捕获测序，获取肿瘤基因突变谱。基于患者突变信息以及药物-靶标基因生物信息数据库，筛选病人可能的治疗响应药物。在体外利用来自病人肿瘤的类器官和异种移植培养模型，验证患者癌细胞对所选药物的敏感性，明确最有效的药物或药物组合。
+            </Typography>
+            <Typography variant={"body1"}>
+              本平台通过分析结直肠癌病人基因组变异，找到适于每个病人的特异性药物靶点，推荐相应药物，朝向结直肠癌的精准医疗迈进。
+            </Typography>
+          </div>
+        </div>
+
+        <div className={classes.leftRow}>
+          {
+            showLoginForm &&
+            <Slide in={true} direction={'left'}>
+              <div className={classes.loginForm}>
+                <LoginFormContainer/>
+              </div>
+            </Slide>
+          }
+          {
+            !showLoginForm &&
             <div>
               <Typography variant={'h5'} component={'h1'}>
                 <Box fontWeight={700} mb={1}>
@@ -92,11 +113,15 @@ const Login: React.FC = () => {
                 登录
               </Button>
             </div>
-        }
+          }
+        </div>
+
       </div>
-      <div className={classes.demo} style={{height: screenHeight}}>
+
+      <div className={classes.demo}>
         <img src={process.env.PUBLIC_URL + '/assets/background.jpg'} alt={'background'} className={classes.background}/>
       </div>
+
     </div>
   )
 };

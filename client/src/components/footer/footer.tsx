@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <footer className={classes.root}>
       <div className={classes.copyright}>
-        Copyright &copy; 2020-{CURRENT_YEAR} ZdyDatabase.cn
+        Copyright &copy; 2020-{CURRENT_YEAR} CIT-CoPT
       </div>
     </footer>
   )

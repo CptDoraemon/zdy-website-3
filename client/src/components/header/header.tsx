@@ -141,7 +141,7 @@ const Header = observer<React.FC<HeaderProps>>(({data, homeLink}) => {
         {/*<img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' className={classes.logo}/>*/}
         <Typography component={'h1'} className={classes.title} >
           <Link to={homeLink} className={classes.homeLink}>
-            DATABASE
+            CIT-CoPT
           </Link>
         </Typography>
         <div className={classes.desktopTabs}>

@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import {tableHeaderKeys, tableHeaderValues} from "../../components/filter-table/search-table/search-table";
 
 const useHydrateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameElement>, isIframeLoaded: boolean) => {
   useEffect(() => {
@@ -10,9 +11,11 @@ const useHydrateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameEl
       return
     }
 
+    console.log(tableData);
+
     const iframeDocument = iframe.contentDocument;
-    const header = ['Gene Symbol', '药品名', '药品类型', '病症', 'FDA Source'];
-    const keys = ['Gene_symbol', 'Drug_name', 'Drug_type', 'disease', 'FDA Source'];
+    // const header = ['Gene Symbol', '药品名', '药品类型', '病症', 'FDA Source'];
+    // const keys = ['Gene_symbol', 'Drug_name', 'Drug_type', 'disease', 'FDA Source'];
     const table = iframeDocument.getElementById('table');
     if (!table) {
       return
@@ -26,7 +29,7 @@ const useHydrateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameEl
 
     function insertTableHeader() {
       const row = iframeDocument.createElement('tr');
-      header.forEach(name => {
+      tableHeaderValues.forEach(name => {
         const cell = iframeDocument.createElement('th');
         cell.innerText = name;
         row.appendChild(cell);
@@ -36,7 +39,7 @@ const useHydrateTable = (tableData: any, iframeRef: React.RefObject<HTMLIFrameEl
 
     function insertTableRow(data: string[]) {
       const row = iframeDocument.createElement('tr');
-      keys.forEach(key => {
+      tableHeaderKeys.forEach(key => {
         const cell = iframeDocument.createElement('td');
         // @ts-ignore
         cell.innerText = data[key];
