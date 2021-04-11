@@ -32,6 +32,22 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>CIT-CoPT</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- es5 shim starts -->
+    <script>
+      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+      if (isIE) {
+        var script1 = document.createElement('script');
+        var script2 = document.createElement('script');
+        script1.src = "%PUBLIC_URL%/assets/polyfills/es5-shim.min.js";
+        script2.src = "%PUBLIC_URL%/assets/polyfills/es5-sham.min.js";
+        document.head.appendChild(script1);
+        document.head.appendChild(script2);
+      }
+    </script>
+    <!-- es5 shim ends -->
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
