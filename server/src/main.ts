@@ -49,10 +49,17 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     transform: true
   }));
+
+  // cors
+  const corsAllowedOrigins = ['http://localhost:3000'];
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: (origin, cb) => {
+      return cb(null, corsAllowedOrigins.includes(origin));
+    },
     credentials: true
   });
+
+
   await app.listen(5000);
 
   // hot reload
