@@ -67,7 +67,7 @@
         // load font via css
         var styleSheet = document.createElement("style");
         styleSheet.type = "text/css";
-        styleSheet.innerText = '@font-face {font-family: ' + 'SimSun' + '; src: url(${fontUrl}) format("truetype");}';
+        styleSheet.innerText = '@font-face {font-family: ' + '"SimSun"' + '; src: url(' + fontUrl + ') format("truetype");}';
         document.head.appendChild(styleSheet);
 
         // update message
