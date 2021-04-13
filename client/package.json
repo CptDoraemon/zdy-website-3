@@ -13,6 +13,8 @@
     "axios": "^0.20.0",
     "clsx": "^1.1.1",
     "highcharts": "8.1.2",
+    "jss": "^10.6.0",
+    "jss-vendor-prefixer-ie10": "^0.1.2",
     "lodash": "^4.17.15",
     "mobx": "^6.0.1",
     "mobx-react": "latest",

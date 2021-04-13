@@ -8,7 +8,9 @@ import {
 } from "react-router-dom";
 import routerUrls from "./router-urls";
 import {CssBaseline} from "@material-ui/core";
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, StylesProvider, jssPreset } from '@material-ui/core/styles';
+import { create } from 'jss';
+import jssIE10Prefixer from 'jss-vendor-prefixer-ie10';
 import theme from './theme';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import RouterScrollRestoration from "./router-scroll-restoration";
@@ -85,13 +87,19 @@ const RoutesWithHeaderAndFooter = () => {
   )
 };
 
+const jss = create({
+  plugins: [...jssPreset().plugins, jssIE10Prefixer()],
+});
+
 const App = () => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <InnerApp />
-      </ThemeProvider>
+      <StylesProvider jss={jss}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <InnerApp />
+        </ThemeProvider>
+      </StylesProvider>
     </Provider>
   )
 };
