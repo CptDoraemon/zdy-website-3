@@ -30,9 +30,9 @@ export interface DefaultFilterState {
 
 const defaultFilterState: DefaultFilterState = {
   filter: [],
-  isPendingApplicable: false,
+  isPendingApplicable: true,
   isResettable: false, // when the active state is different than the original state, the filters are resettable
-  dropdown: false
+  dropdown: true
 };
 
 export default defaultFilterState

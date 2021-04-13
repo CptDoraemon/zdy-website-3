@@ -45,7 +45,7 @@ const InternalFilterTable: React.FC<FilterTableProps> = (
         {/*@ts-ignore*/}
         <FiltersGroupContainer />
         <BasicInfo/>
-        <Examples/>
+        {/*<Examples/>*/}
         <SearchTableContainer title={title}/>
       </> :
       <Loading/>

@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {FilterState} from "../../../redux/states/filter";
 import TextField from "@material-ui/core/TextField";
+import {useMount} from "react-use";
+import {useDispatch} from "react-redux";
+import {filterActionsGenerators} from "../../../redux/actions/filter/filter";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,6 +20,7 @@ interface FilterMultipleTextareaProps {
 const FilterMultipleTextarea: React.FC<FilterMultipleTextareaProps> = ({filter, updatePendingFilterWithValueArray}) => {
   // const classes = useStyles();
 
+  const dispatch = useDispatch();
   const value = filter.pending.map(obj => obj.internalName);
 
   const changeHandler = (e: React.ChangeEvent<any>) => {

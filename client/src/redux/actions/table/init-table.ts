@@ -51,6 +51,13 @@ const initTable = (
 
         dispatch(filterActionsGenerators.initFilter([geneSymbolFilter, ...filters]));
         dispatch(sortActionsGenerators.initSort([sortByOptions, ...sorts]));
+
+        // prefill filter
+        // @ts-ignore
+        dispatch(filterActionsGenerators.updatePendingFilterWithValueArray('Gene_symbol', ['EGFR', 'BRAF']));
+        // @ts-ignore
+        dispatch(filterActionsGenerators.applyPendingFilter());
+
         dispatch(stateInitialized())
       } else {
         dispatch(fetchDataFailed('Server Error'));
