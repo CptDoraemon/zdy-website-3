@@ -67,7 +67,7 @@
         // load font via css
         var styleSheet = document.createElement("style");
         styleSheet.type = "text/css";
-        styleSheet.innerText = `@font-face {font-family: 'SimSun'; src: url(${fontUrl}) format("truetype");}`;
+        styleSheet.innerText = '@font-face {font-family: ' + 'SimSun' + '; src: url(${fontUrl}) format("truetype");}';
         document.head.appendChild(styleSheet);
 
         // update message
@@ -75,9 +75,13 @@
         while (messageEl.firstChild) {
           messageEl.removeChild(messageEl.lastChild);
         }
-        messageEl.innerText = isSucceeded ? '字体文件加载成功' : '字体文件加载失败';
+        if (isSucceeded) {
+          messageEl.innerText = '字体文件加载成功';
+        } else {
+          messageEl.innerText = '字体文件加载失败';
+        }
         setTimeout(function() {
-          messageEl.remove();
+          messageEl.parentNode.removeChild(messageEl);
         }, 3000)
       }
 
@@ -85,7 +89,7 @@
         var progress = Math.round(e.loaded / e.total * 100);
         if (progress !== lastProgress) {
           lastProgress = progress;
-          progressTextEl.innerText = `${progress}%`
+          progressTextEl.innerText = progress + '%';
         }
       }
     }
