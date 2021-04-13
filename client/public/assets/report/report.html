@@ -26,7 +26,7 @@
   </div>
 
   <script>
-    window.onload = () => {
+    window.onload = function() {
       setDateStrings();
       loadCss('./report.css');
       loadFont();
@@ -75,7 +75,7 @@
           messageEl.removeChild(messageEl.lastChild);
         }
         messageEl.innerText = isSucceeded ? '字体文件加载成功' : '字体文件加载失败';
-        setTimeout(() => {
+        setTimeout(function() {
           messageEl.remove();
         }, 3000)
       }
