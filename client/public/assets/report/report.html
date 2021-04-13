@@ -42,7 +42,8 @@
 
     function setDateStrings() {
       var date = new Date();
-      var dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      var month = date.getMonth() + 1;
+      var dateString = date.getFullYear() + '-' + month + '-' + date.getDate();
       var els = document.getElementsByClassName('date');
       for (var i=0; i<els.length; i++) {
         els[i].innerHTML = els[i].innerHTML + dateString
