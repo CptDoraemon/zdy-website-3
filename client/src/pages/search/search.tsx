@@ -6,7 +6,7 @@ import {sortOptions} from "./search-table-options";
 const useStyles = makeStyles(theme => ({
   root: {
 
-  }
+  },
 }));
 
 interface SearchProps {

@@ -11,6 +11,7 @@ import {observer} from "mobx-react";
 import HeaderButtonGroup from "./header-button-group";
 import HeaderSideBar from "./header-side-bar";
 import {Drawer} from "@material-ui/core";
+import topImage from "./topImage.jpg";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -80,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
   username: {
     fontWeight: 700,
     padding: theme.spacing(0, 1)
+  },
+  topImage: {
+    width: '100%',
   }
 }));
 
@@ -136,34 +140,37 @@ const Header = observer<React.FC<HeaderProps>>(({data, homeLink}) => {
   const closeSideBar = () => setIsSideBarActive(false);
 
   return (
-    <AppBar position="static" elevation={0}>
-      <Toolbar variant={'dense'} className={classes.toolbar}>
-        {/*<img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' className={classes.logo}/>*/}
-        <Typography component={'h1'} className={classes.title} >
-          <Link to={homeLink} className={classes.homeLink}>
-            CIT-CoPT
-          </Link>
-        </Typography>
-        <div className={classes.desktopTabs}>
+    <>
+      <AppBar position="static" elevation={0}>
+        <Toolbar variant={'dense'} className={classes.toolbar}>
+          {/*<img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' className={classes.logo}/>*/}
+          <Typography component={'h1'} className={classes.title} >
+            <Link to={homeLink} className={classes.homeLink}>
+              CIT-CoPT
+            </Link>
+          </Typography>
+          <div className={classes.desktopTabs}>
+            {tabs}
+          </div>
+          <div className={classes.buttonGroup}>
+            <div className={classes.username}>
+              {accountContext.username}
+            </div>
+            {
+              accountContext.isLogin &&
+              <HeaderButtonGroup setIsSideBarActive={setIsSideBarActive}/>
+            }
+          </div>
+        </Toolbar>
+        <div className={classes.mobileTabs}>
           {tabs}
         </div>
-        <div className={classes.buttonGroup}>
-          <div className={classes.username}>
-            {accountContext.username}
-          </div>
-          {
-            accountContext.isLogin &&
-            <HeaderButtonGroup setIsSideBarActive={setIsSideBarActive}/>
-          }
-        </div>
-      </Toolbar>
-      <div className={classes.mobileTabs}>
-        {tabs}
-      </div>
-      <Drawer anchor={'right'} open={isSideBarActive} onClose={closeSideBar} classes={{paper: classes.drawer}}>
-        <HeaderSideBar close={closeSideBar}/>
-      </Drawer>
-    </AppBar>
+        <Drawer anchor={'right'} open={isSideBarActive} onClose={closeSideBar} classes={{paper: classes.drawer}}>
+          <HeaderSideBar close={closeSideBar}/>
+        </Drawer>
+      </AppBar>
+      <img src={topImage} alt={'header image'} className={classes.topImage}/>
+    </>
   )
 });
 
