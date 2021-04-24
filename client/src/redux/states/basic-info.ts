@@ -11,16 +11,16 @@ const date = new Date();
 const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
 const defaultData = {
-  'name': '吴美荣',
-  'sex': '女',
-  'age': '71',
-  'diseaseId': 'BI21-02120',
-  'id': '3017659',
-  'phone': '15112597986',
-  'diagnose': '1、乙状结肠中分化腺癌 \n2、缺铁性贫血',
-  'department': '肠胃外科',
-  'sample': '乙状结肠组织',
-  'items': '分子诊断用药',
+  'name': '',
+  'sex': '',
+  'age': '',
+  'diseaseId': '',
+  'id': '',
+  'phone': '',
+  'diagnose': '',
+  'department': '',
+  'sample': '',
+  'items': '',
   'applicationDate': dateString,
   'reportDate': dateString,
 };
