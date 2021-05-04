@@ -26,7 +26,10 @@ RUN mkdir client
 RUN mv ./temp/client/* ./client
 RUN rm -rf ./temp
 
+# install pm2
+RUN npm install pm2 -g
+
 EXPOSE 5000
 
-CMD [ "npm", "run", "start:prod" ]
+CMD [ "pm2-runtime", "start"]
 
